@@ -1,0 +1,56 @@
+#search-results-page
+{
+	.results-page-header
+	{
+		width: 100%;
+		background: @orange-dark;
+		color: #FFF;
+		text-shadow: none;
+		padding: .5em 1em;
+		margin-top: 1px;
+		font-size: .9em;
+	}
+
+	.call-to-action
+	{
+		width: 100%;
+		padding: .9em 1em;
+		color: #fff;
+		position: relative;
+		background: #de390c url(../../../img/tap-gesture-icon.png) center left no-repeat;
+		background-size: 50px 50px;
+
+		p {
+			margin: 0;
+			padding: 0 2em;
+		}
+	}
+
+	.results-box
+	{
+		.empty-results
+		{
+			padding: 1em;
+			text-align: center;
+			.ui-btn
+			{
+				background: @orange !important;
+				color: #FFF;
+				text-shadow: none;
+				border: none;
+				&:hover {
+					background: @orange-dark !important;
+				}
+			}
+		}
+
+		.restaurants
+		{
+			margin: 0 !important;
+			.restaurant
+			{
+				img { width: 80px !important; height: 80px !important; padding: .5em .5em; }
+			}
+		}
+	}
+}

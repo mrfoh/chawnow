@@ -1,0 +1,179 @@
+.howitworks-page
+{
+	background: url('@{imagepath}/process.jpg') no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+
+	.head-line
+	{
+		background: #FFF;
+		text-align: center;
+		padding: 20px;
+		width: 60%;
+		margin: 10px auto;
+		position: relative;
+		.border-radius(4px);
+
+		&:before
+		{
+			content: '';
+			position: absolute;
+			border-style: solid;
+			border-width: 30px 40px 0;
+			border-color: #fff transparent;
+			display: block;
+			width: 0;
+			z-index: 1;
+			bottom: -15px;
+			left: 45%;
+		}
+
+		h2
+		{
+			font-family: 'abeatbykai';
+			font-size: 30px;
+			color: @orange-dark;
+		}
+
+		p 
+		{
+			font-size: 20px;
+		}
+	}
+
+	.step
+	{
+		.inner
+		{
+			width: 95%;
+			margin: 10px auto;
+			background: #FFF;
+			.border-radius(4px);
+			-webkit-box-shadow: 0px 3px 5px rgba(50, 50, 59, 0.6);
+			-moz-box-shadow:    0px 3px 5px rgba(50, 50, 59, 0.6);
+			box-shadow:         0px 3px 5px rgba(50, 50, 59, 0.6);
+			.box-sizing(border-box);
+
+			.pictogram
+			{
+				width: 100px;
+				height: 100px;
+				margin: 0px auto;
+
+				img
+				{
+					padding: 10px;
+					height: 80px;
+					width: 80px;
+					background: #999;
+					margin-top: 10px;
+					.border-radius(100%);
+				}
+			}
+
+			.content
+			{
+				.step-no
+				{
+					display: block;
+					text-align: left;
+					font-size: 18px;
+					padding: 10px 10px;
+					margin: 0;
+					border-bottom: 1px dashed #333;
+
+					a {
+						text-align: center;
+						display: inline-block;
+						background: @red;
+						color: #FFF;
+						.border-radius(100%);
+						padding: 15px 20px;
+						font-size: 18px;
+					}
+
+				}
+
+				p {
+					text-align: center;
+					font-size: 16px;
+					padding: 10px 10px;
+				}
+			}
+		}
+	}
+
+	.call-to-action
+	{
+		background: #FFF;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		-webkit-box-shadow: 0px 3px 5px rgba(50, 50, 59, 0.6);
+		-moz-box-shadow:    0px 3px 5px rgba(50, 50, 59, 0.6);
+		box-shadow:         0px 3px 5px rgba(50, 50, 59, 0.6);
+
+		h3 {
+			font-size: 20px;
+			text-align: center;
+			font-family: 'abeatbykai';
+		}
+
+		.pull-left { width: 70%;}
+		.pull-right { 
+			width: 30%;
+			text-align: left;
+			padding: 10px 0px;
+		}
+	}
+}
+/* Large Screens */
+@media (min-width: 1200px)
+{
+}
+/* iPads (landscape) ----------- */
+@media (min-width : 1024px)
+{
+	.howitworks-page
+	{
+		.step
+		{
+			.content 
+			{
+				.step-no 
+				{ 
+					font-size: 14px !important;
+					padding: 5px 5px !important;
+					a
+					{
+						font-size: 14px !important;
+						padding: 10px 15px !important; 
+					}
+				}
+				p
+				{
+					font-size: 14px !important;
+					min-height: 86px !important;
+				}
+			}
+		}
+	}
+}
+
+/* iPads (portrait) */
+@media (min-width : 768px)
+{
+	.howitworks-page
+	{
+		.step
+		{
+			.content 
+			{
+				.step-no 
+				{ 
+					text-align: center !important;
+				}
+			}
+		}
+	}
+}

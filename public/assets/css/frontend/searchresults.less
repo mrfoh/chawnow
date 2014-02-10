@@ -1,0 +1,107 @@
+.search-results-page
+{
+	background: url('@{imagepath}/bg-pizza-2.jpg') no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+
+	#filter-box, #results-box {
+		.box-sizing(border-box);
+		margin-bottom: 10px;
+	}
+	#filter-box
+	{
+		background: #FFF;
+		h4 {
+			text-align: left;
+			margin: 0;
+			padding: 10px 15px;
+			font-size: 1.2em;
+		}
+		.filter-group-header {
+			text-align: left;
+			margin: 0;
+			padding: 10px 15px;
+			font-size: 1em;
+			font-weight: bold;
+		}
+		ul
+		{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li
+			{
+				display: block;
+				font-size: 1em;
+				padding: 0px 15px;
+			}
+		}
+	}
+
+	#results-box
+	{
+		.empty-results
+		{
+			background: #FFF;
+			text-align: center;
+			padding: 30px;
+		}
+		.result-list
+		{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			width: 100%;
+
+			.item
+			{
+				background: #FFF;
+				.box-sizing(border-box);
+				margin-bottom: 10px;
+
+				.item-top {
+					width: 100%;
+					background: #fbaf32;
+					color: #FFF;
+					.item-info {
+						padding: 5px 15px;
+						.name { font-weight: bold; font-size: 1.2em; margin: 0; padding: 10px 0;}
+						.address { font-size: 0.8em; }
+					}
+				}
+
+				.item-bottom {
+					padding: 10px 20px;
+					.logo {
+						width: 150px;
+						height: 100px;
+						padding: 10px;
+						img { width: 100%; height: 100%; }
+					}
+					.meta {
+						padding: 0px 20px;
+						ul {
+							margin: 0;
+							padding: 0;
+							list-style: none;
+							width: 360px;
+							li  {
+								font-size: 1em;
+								padding: 5px;
+								float: left;
+								min-width: 180px;
+							}
+						}
+					}
+				}
+
+				.item-status {
+					background: #999;
+					padding: 7px 20px;
+				}
+			}
+		}
+	}
+}

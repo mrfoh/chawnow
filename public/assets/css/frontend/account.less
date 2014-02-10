@@ -1,0 +1,144 @@
+.account-page
+{
+	background: url('@{imagepath}/process.jpg') no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+
+	.account-page-sidebar
+	{
+		ul
+		{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			li
+			{
+				display: block;
+				border-bottom: 1px solid #E6E6E6;
+				.transition(background, 0.25s, ease-in);
+				&:last-child { border-bottom: none; }
+				a
+				{
+					display: block;
+					font-size: 1.1em;
+					font-weight: bold;
+					color: #333;
+					padding: 10px 15px;
+					text-decoration: none;
+				}
+				&:hover
+				{
+					background: @orange;
+					a { color: #FFF; }
+				}
+				&.active
+				{
+					background: @orange;
+					a { color: #FFF; }
+				}
+			}
+		}
+	}
+
+	.account-page-content
+	{
+		#account-form
+		{
+			padding: 30px;
+		}
+
+		.address-form
+		{
+			padding: 20px;
+			width: 60%;
+			margin: 0 auto;
+			display: none;
+
+			span.help
+			{
+				font-size: 0.9em;
+				color: #3A3939;
+			}
+		}
+
+		.address-list
+		{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li
+			{
+				width: 100%;
+				display: block;
+				border-bottom: 1px solid #E6E6E6;
+				.address
+				{
+					position: relative;
+					.name {
+						padding: 10px 15px;
+						font-size: 1.2em;
+						color: #333;
+						font-weight: bold;
+						text-align: left;
+					}
+
+					.address-text {
+						padding: 10px 15px;
+						font-size: 1em;
+						color: #333;
+						text-align: left;
+					}
+
+					.actions 
+					{
+						position: absolute;
+						right: 20px;
+						top: 10px;
+						a {
+							text-decoration: none;
+							display: inline-block;
+							color: #333;
+							padding: 0px 10px;
+						}
+					}
+				}
+			}
+		}
+
+		.order-list
+		{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			.badge-info { background: #2DB8E4; }
+			.badge-warning { background: @orange; }
+			.badge { padding: 7px 12px; font-size: 15px; }
+			li.order
+			{
+				padding: 20px;
+				border-bottom: 1px solid #E6E6E6;
+				&:last-child { border-bottom: none; }
+				a { color: #333; text-decoration: none; &:hover{ color: @orange; } }
+			}
+		}
+
+		.order
+		{
+
+		}
+		
+		.toggle{
+			text-align: center;
+			padding: 10px 0px;
+		}
+
+		.empty
+		{
+			padding: 30px;
+			text-align: center;
+		}
+	}
+}

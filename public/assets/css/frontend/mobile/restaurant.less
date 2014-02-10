@@ -1,0 +1,203 @@
+#restaurant-page
+{
+	.ui-tabs { padding: 0 !important; }
+	.restaurant-info
+	{
+		padding: 1em;
+		background: #FFF;
+		h3,p {
+			margin: 0;
+			text-align: left;
+		}
+		h3 { line-height: 100%; padding: .5em 0; color: @orange;}
+		p {
+			font-size: .9em;
+			line-height: 120%;
+		}
+	}
+
+	.resturant-nav
+	{
+		li
+		{
+			background: @orange !important;
+			color: #FFF !important;
+			text-shadow: none;
+			&:hover {
+				background: @orange-dark !important;
+			}
+			&.active { background: @orange-dark !important; }
+
+			a 
+			{ 
+				border: none;
+				background: #FFF !important;
+				color: #333 !important;
+				text-shadow: none !important;
+				&:hover {
+					border-bottom: 5px solid @orange-dark;
+				}
+				&:focus {
+					webkit-box-shadow: none !important;
+					-moz-box-shadow: none !important;
+					box-shadow: none !important;
+				}
+			}
+			a.ui-btn-active
+			{
+				background: #FFF !important;
+				color: #333 !important;
+				text-shadow: none !important;
+				border-bottom: 5px solid @orange-dark;
+			}
+		}
+	}
+
+	#menus
+	{
+		.call-to-action
+		{
+			width: 100%;
+			padding: .9em 1em;
+			color: #fff;
+			position: relative;
+			background: #999 url(../../../img/tap-gesture-icon.png) center left no-repeat;
+			background-size: 50px 50px;
+
+			p {
+				margin: 0;
+				padding: 0 2em;
+			}
+		}
+
+		#menu-list
+		{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li.menu-name {
+				padding: .5em 1em;
+				background: @orange;
+				color: #fff;
+				font-size: 1em;
+				text-shadow: none;
+				text-transform: uppercase;
+			}
+
+			li.category-name {
+				padding: .5em 1em;
+				background: @orange-dark;
+				color: #FFF;
+				font-size: .9em;
+				text-shadow: none;
+			}
+
+			ul.menu-items
+			{
+				margin: 0;
+				padding: 0;
+				li.item {
+					display: block;
+					background: #FFF;
+					text-shadow: none;
+					border-bottom: 1px solid #E2E2E2;
+					padding: 1em 1em;
+					font-size: .85em;
+
+					&:last-child { border-bottom: none; }
+
+					&:hover {
+						background: #E2E2E2;
+					}
+					a {
+						color: #333;
+						display: block;
+						text-decoration: none;
+						font-weight: bold;
+						font-size: .8em;
+					}
+				}
+			}
+		}
+	}
+
+	#myorder
+	{
+		ul.cart-contents
+		{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li
+			{
+				background: #FFF;
+				border-top: 1px solid #EBE9E9;
+				display: block;
+				.name { padding: 1em 1em; font-size: .9em;}
+
+				&.sub-total
+				{
+					span { margin: 0; padding: 1em 1em; font-size: .9em; }
+				}
+			}
+		}
+
+		.cart-actions
+		{
+			.btn-info {
+				background-color: #5bc0de;
+				border-color: #46b8da;
+				color: #fff;
+			    text-shadow: none;
+				&:hover {
+					background-color: #46b8da;
+				}
+			}
+
+			.btn-success {
+				color: #fff;
+				background-color: #afd134;
+				border-color: #c5db57;
+				 text-shadow: none;
+				&:hover {
+					background-color: #c5db57;
+				}
+			}
+		}
+
+		.cart-footer
+		{
+			text-align: center;
+		}
+	}
+
+	#more-info
+	{
+		.info-box
+		{
+			background: #FFF;
+			.header {
+				background: @orange-dark;
+				color: #FFF;
+				padding: .5em 1em;
+				border: none;
+			}
+		}
+
+		#hours
+		{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+
+			li
+			{
+				border-top: 1px solid #EBEBEB;
+				.day, .time { padding: .5em; font-size: .9em; }
+				.time.active { background: #EBEBEB; }
+			}
+		}
+	}
+}

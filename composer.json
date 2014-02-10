@@ -1,0 +1,40 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+	"require": {
+		"laravel/framework": "4.0.*",
+		"mobiledetect/mobiledetectlib": "dev-master",
+		"suncat/mobile-detect-bundle": "dev-master",
+		"cartalyst/sentry": "2.0.*@dev",
+		"facebook/php-sdk": "dev-master",
+        "pusher/pusher-php-server": "dev-composer",
+        "madlymint/shpcart": "1.1.*@dev",
+        "barryvdh/laravel-dompdf": "dev-master"
+	},
+	"autoload": {
+		"classmap": [
+			"app/commands",
+			"app/controllers",
+			"app/models",
+			"app/database/migrations",
+			"app/database/seeds",
+			"app/tests/TestCase.php"
+		]
+	},
+	"scripts": {
+		"pre-update-cmd": [
+			"php artisan clear-compiled"
+		],
+		"post-install-cmd": [
+			"php artisan optimize"
+		],
+		"post-update-cmd": [
+			"php artisan optimize"
+		]
+	},
+	"config": {
+		"preferred-install": "dist"
+	},
+	"minimum-stability": "dev"
+}

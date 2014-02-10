@@ -1,0 +1,62 @@
+.border-radius(@radius)
+{
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.border-radius-top(@radius)
+{
+	-webkit-border-top-left-radius: @radius;
+	-webkit-border-top-right-radius: @radius;
+	-moz-border-radius-topleft: @radius;
+	-moz-border-radius-topright: @radius;
+	-ms-border-top-left-radius: @radius;
+	-ms-border-top-right-radius: @radius;
+	border-top-left-radius: @radius;
+	border-top-right-radius: @radius;
+}
+
+.border-radius-bottom(@radius)
+{
+	-webkit-border-bottom-right-radius: @radius;
+	-webkit-border-bottom-left-radius: @radius;
+	-moz-border-radius-bottomright: @radius;
+	-moz-border-radius-bottomleft: @radius;
+	-ms-border-radius-bottomright: @radius;
+	-ms-border-radius-bottomleft: @radius;
+	border-bottom-right-radius: @radius;
+	border-bottom-left-radius: @radius;
+}
+
+.transition(@property, @timing, @transition)
+{
+	-webkit-transition: @property @timing @transition;
+	-moz-transition: @property @timing @transition;
+	-ms-transition: @property @timing @transition;
+	transition: @property @timing @transition;
+}
+
+.box-sizing(@type)
+{
+	-webkit-box-sizing: @type;
+	-moz-box-sizing: @type;
+	-ms-box-sizing: @type;
+	-box-sizing: @type;
+}
+
+.bg-radial(@inner, @outer)
+{
+	background-color: @outer;
+	background: -webkit-radial-gradient(circle,@inner, @outer);
+	background: -moz-radial-gradient(circle,@inner, @outer);
+	background: -ms-radial-gradient(circle,@inner, @outer);
+}
+
+.background-clip(@type)
+{
+	background-clip: @type;
+	-webkit-background-clip: @type;
+	-moz-background-clip: @type;
+}

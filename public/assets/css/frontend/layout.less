@@ -1,0 +1,285 @@
+@font-face {
+  font-family: 'abeatbykai';
+  src: url('../../fonts/abeakrg-webfont.eot');
+  src: url('../../fonts/abeakrg-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/abeakrg-webfont.woff') format('woff'), url('../../fonts/abeakrg-webfont.ttf') format('truetype'), url('../../fonts/abeakrg-webfont.svg#abeatbykairegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'abeatbykairegular';
+  src: url('../../fonts/abeatbykairegular-webfont.eot');
+  src: url('../../fonts/abeatbykairegular-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/abeatbykairegular-webfont.woff') format('woff'), url('../../fonts/abeatbykairegular-webfont.ttf') format('truetype'), url('../../fonts/abeatbykairegular-webfont.svg#abeatbykairegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*-----------------Layout----------------------- */
+.viewport
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+
+  .naira { text-decoration: line-through; }
+  .btn-warning {
+    background: @orange;
+    &:hover {
+      background: @orange-dark;
+    }
+  }
+  
+  .btn-info
+  {
+    .border-radius(0);
+  }
+  
+  .btn-danger {
+    background: @red;
+    .border-radius(0);
+    &:hover {
+      background: #dd4312;
+    }
+  }
+}
+
+/* Site Header */
+.site-header
+{
+  position: relative;
+  width: 95%;
+  height: 70px;
+  margin: 10px auto;
+  background: #FFF;
+
+  .header-inner{ height: 100%; }
+
+  .logo {
+    a
+    {
+      display: block;
+      text-indent: -9999;
+      width: 250px;
+      height: 70px;
+      background: url(../../img/logo.png) center center no-repeat;
+      background-size: 200px 50px;
+    }
+  }
+  /* Site nav */
+  .site-nav
+  {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: inherit !important;
+
+    .top-link
+    {
+      display: inline-block;
+      height: inherit !important;
+      position: relative;
+      text-align: center;
+      .transition(all, 0.25s, ease-in);
+      &.active { border-bottom: 5px solid @orange; }
+      &:hover { border-bottom: 5px solid @orange; }
+
+      .link
+      {
+        text-align: center;
+        padding: 25px 15px;
+        display: block;
+        text-decoration: none;
+        color: #333;
+        font-family: 'abeatbykai';
+        font-weight: bold;
+        font-size: 16px;
+      }
+    }
+
+    .dropdown-menu a { text-align: left;}
+  }
+
+}
+
+.site-content, .site-footer
+{
+  width: 95%;
+  margin: 0 auto;
+}
+
+/* Site-content */
+.site-content
+{
+  .card
+  {
+    background: #FFF;
+    margin-bottom: 10px;
+    .card-header
+    {
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #FFF;
+      background: @orange;
+      padding: 10px 0;
+    }
+  }
+}
+
+/* Site Footer */
+.site-footer
+{
+  background: #000;
+  opacity: 0.8;
+  color: #FFF;
+  p, h3, a , button{ opacity: 1 !important; }
+
+  h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: normal;
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+
+    li {
+      display: block;
+      text-align: left;
+      float: left;
+      width: 50%;
+      a {
+        text-decoration: none;
+        color: #BEB2B2;
+        text-align: left;
+        display: block;
+        padding: 5px 0px;
+        .transition(color, 0.2s, ease-in);
+        &:hover {
+          color: #FFF;
+        }
+      }
+    }
+
+  }
+
+  .footer-inner {
+    padding: 20px 10px;
+  }
+
+  /* Newsletter Box */
+  .newsletter-box
+  {
+    width: 20%;
+    .form-control {
+      height: 40px;
+      .border-radius(0);
+    }
+  }
+
+  /* Cuisines Box*/
+  .cuisine-box
+  {
+    width: 25%;
+    margin-left: 5%;
+  }
+
+  .company-box
+  {
+    width: 20%;
+    margin-left: 5%;
+  }
+
+  .social-box
+  {
+    margin-left: 5%;
+    ul
+    {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: block;
+
+      li 
+      {
+        float: left;
+        display: block;
+        width: 48%;
+        height: 50px;
+        background: #fbaf32;
+        color: #FFF;
+        margin-left: 2px; margin-bottom: 2px;
+        .transition(all, 0.25s, ease-in);
+
+        &:hover { 
+          background: #333;
+        }
+
+        a 
+        {
+          display: block;
+          color: #FFF;
+          text-align: center;
+          padding: 10px 20px;
+          text-decoration: none;
+        }
+
+      }
+
+    }
+
+  }
+
+  .copyright {
+    width: 55%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'abeatbykai';
+    color: #BEB2B2;
+    padding: 5px 10px;
+    border-top: 2px solid #BEB2B2;
+  }
+}
+
+/* iPads (landscape) ----------- */
+@media  (max-width : 1024px)
+{
+  .site-footer
+  {
+    .footer-inner
+    {
+      width: 100%;
+    }
+  }
+}
+
+/* iPads (portrait) ----------- */
+@media (min-width : 768px)
+{
+    .site-header
+    {
+      .header-inner{
+        width: 100% !important;
+      }
+
+      .site-nav a {
+        font-size: 14px !important;
+      }
+    }
+
+    .site-content
+    {
+      .page-content
+      {
+        width: 100%; 
+      }
+    }
+}

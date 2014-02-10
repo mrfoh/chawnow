@@ -1,0 +1,60 @@
+/* menu-panel */
+#menu-panel
+{
+	ul
+	{
+		li
+		{
+			a
+			{
+				background: #FFF !important;
+				&:hover { background: @orange !important; color: #FFF; } 
+			}
+		}
+	}
+}
+.ui-page-theme-a
+{
+	background: #DDDAD6 !important;
+}
+/* Header */
+.ui-header
+{
+	background: #FFF !important;
+
+	.panel-trigger
+	{
+		background: @orange !important;
+		border: none !important;
+		top: .5em;
+		left: 1em;
+	}
+
+	.logo	
+	{
+		background: url('@{imgpath}/logo.png') center center no-repeat;
+		background-size: 150px 38px;
+		min-height: 2.5em;
+		width: 200px;
+		margin: 1% auto;
+	}
+}
+
+.ui-content { 
+	padding: 0 !important;
+
+	.content-box
+	{
+		background: #FFF;
+		padding: 1em;
+
+		h3
+		{
+			margin: 0;
+			padding: .5em 0;
+			color: @red;
+			border-bottom: 1px solid #333;
+			text-align: center;
+		}
+	}
+}

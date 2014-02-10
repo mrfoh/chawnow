@@ -1,0 +1,268 @@
+.restaurant-page
+{
+	background: url('@{imagepath}/bg-pizza.jpg') no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+
+	#restaurant-content
+	{
+		margin-bottom: 10px;
+		.restaurant-content-top
+		{
+			background: @orange;
+			color: #FFF;
+
+			.restaurant-name 
+			{
+				padding: 10px 20px;
+				h3
+				{
+					margin: 0;
+					font-size: 1.5em;
+				}
+			}
+
+			.restaurant-rating
+			{
+				padding: 10px 20px;
+				.rating
+				{
+					margin: 0;
+					padding: 0;
+					list-style: none;
+
+					li 
+					{
+						display: inline-block;
+						padding: 0px 5px;
+					}
+				}
+			}
+		}
+		.restaurant-header
+		{
+			background: #FFF;
+			.restaurant-logo
+			{
+				width: 30%;
+				height: 200px;
+				padding: 10px;
+				img { width: 100%; height: 100%; }
+			}
+			.restaurant-info
+			{
+				width: 70%;
+				.info-nav
+				{
+					margin: 0;
+					padding: 0;
+					list-style: none;
+					li
+					{
+						float: left;
+						width: 31%;
+						margin: 1%;
+						text-align: center;
+						border-bottom: 5px solid @orange;
+						.transition(all, 0.25s, linear);
+						a 
+						{
+							display: block;
+							text-align: center;
+							padding: 10px;
+							color: #333;
+							font-weight: bold;
+							text-decoration: none;
+						}
+						&:hover
+						{
+							border-bottom: 10px solid @orange;
+						}
+						&.active { border-bottom: 10px solid @orange; }
+					}
+				}
+
+				#hours
+				{
+					ul
+					{
+						margin: 0;
+						padding: 0;
+						list-style: none;
+						li
+						{
+							float: left;
+							width: 50%;
+							margin-bottom: 10px;
+							.day, .time {padding: 5px 10px; }
+							.day { width: 100px; }
+							.time.active { background:#CFCFCF; }
+						}
+					}
+				}
+			}
+		}
+
+		.restaurant-menu
+		{
+			background: #FFF;
+			margin-top: 10px;
+			.menus
+			{
+				width: 30%;
+				h3 {
+					text-align: center;
+					margin: 0;
+					padding: 10px 20px;
+					background: @orange;
+					color: #FFF;
+					font-size: 1.2em;
+				}
+
+				.menu-list
+				{
+					margin: 0;
+					padding: 0;
+					list-style: none;
+
+					li
+					{
+						display: block;
+						a
+						{
+							display: block;
+							padding: 10px 20px;
+							text-decoration: none;
+							color: #333;
+							font-size: 1em;
+							font-weight: bold;
+						}
+
+						.categories
+						{
+							margin: 0;
+							padding: 0;
+							li
+							{
+								a { padding-left: 30px; font-weight: normal;}
+								&.active {
+									background: @orange;
+									a { color: #FFF; }
+								}
+							}
+						}
+					}
+				}
+			}
+			.items
+			{
+				.menu-title
+				{
+					margin: 0;
+					text-align: center;
+					padding: 10px;
+					font-size: 1.2em;
+				}
+				width: 70%;
+				.item-list
+				{
+					margin: 0;
+					padding: 0;
+					list-style: none;
+					width: 100%;
+
+					li
+					{
+						width: 90%;
+						margin: 0px auto;
+						.transition(background, 0.3s, ease-in);
+						&:last-child
+						{
+							.menu-item { border-bottom: none; }
+						}
+						&:hover {
+							background: #999;
+						}
+						.menu-item
+						{
+							position: relative;
+							padding: 10px;
+							border-bottom: 1px solid #E0DFDF;
+
+							.item-price
+							{
+								span { padding-right: 10px; }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.restaurant-page, .checkout-page, .verification-page, .order-complete-page
+{
+	.user-cart
+	{
+		.cart-header
+		{
+			text-align: center;
+			color: #FFF;
+			background: @orange;
+			padding: 10px;
+			font-weight: bold;
+			font-size: 1.5em;
+		}
+
+		.cart-content
+		{
+			background: #FFF;
+			padding: 5px;
+			.box-sizing(border-box);
+			border: 1px solid @orange;
+			.loading-indicator {
+				width: 50%;
+				margin: 50px auto;
+				text-align: center;
+				display: none;
+			}
+
+			.cart-contents
+			{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				display: none;
+				li
+				{
+					margin-bottom: 10px;
+					border-bottom: 1px solid #E0DFDF;
+					padding: 5px;
+					font-size: 0.9em;
+					&:last-child {
+						border-bottom: none;
+					}
+					&.sub-total
+					{
+						border-bottom: none;
+					}
+				}
+			}
+		}
+		.cart-footer
+		{
+			width: 90%;
+			margin: 0 auto;
+			background: #FFF;
+			border: 1px solid @orange;
+			p { 
+				text-align: center;
+				font-size: 1em;
+				margin: 0;
+				padding: 10px 0;
+			}
+		}
+	}
+}

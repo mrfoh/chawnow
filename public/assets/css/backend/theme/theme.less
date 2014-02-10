@@ -1,0 +1,144 @@
+@import '../../common/mixins.less';
+@import 'animate.less';
+@import 'plugins/sidr.less';
+@import 'plugins/timepicker.less';
+@import '../../common/gritter/jquery.gritter.less';
+@import 'style.less';
+@import 'responsive.less';
+@import 'custom-icon-set.less';
+
+/** Restuarant Forn **/
+#restaurant-form-page
+{
+	.logo-thumbnail 
+	{
+		width: 300px;
+		height: 200px;
+		background: url('../../../img/restaurant-logo-default.png') no-repeat;
+		position: relative;
+		margin-right: 20px;
+
+		canvas {
+			width: 300px !important;
+			height: 200px !important;
+			z-index: 1;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+
+		a.remove-trigger {
+			position: absolute;
+			z-index: 30;
+			top: 20px;
+			right: 20px;
+			color: #333;
+			text-decoration: none;
+			display: none;
+			&:hover {
+				color: #FFF;
+			}
+		}
+	}
+
+	#logistics-info 
+	{
+		display: none;
+		.info-group
+		{
+			display: none;
+		}
+	}
+
+	.times
+	{
+		.input-append { display: block !important; }
+	}
+
+	#hours
+	{
+		.control-group
+		{
+			float: left;
+			width: 33%;
+		}
+
+		.form-actions
+		{
+			clear: both;
+		}
+	}
+}
+
+/** Restaurant Schedule **/
+#restaurant-schedule-page
+{
+	.control-group
+	{
+		float: left;
+		width: 33%;
+	}
+
+    .form-actions
+	{
+		clear: both;
+	}
+}
+
+#restaurant-staff-page
+{
+	.staff-list
+	{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		.staff
+		{
+			display: block;
+			width: 100%;
+			position: relative;
+			border-bottom: 1px solid #DDD;
+			padding: 10px 0px;
+			font-size: 1.1em;
+			&:last-child { border-bottom: none; }
+
+			.remove-staff {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				display: block;
+			}
+		}
+	}
+}
+
+#cuisines-page
+{
+	.cuisine-list
+	{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		.cuisine
+		{
+			display: block;
+			width: 100%;
+			position: relative;
+			border-bottom: 1px solid #DDD;
+			padding: 10px 0px;
+			font-size: 1.1em;
+			&:last-child { border-bottom: none; }
+
+			.remove-cuisine {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				display: block;
+			}
+		}
+	}
+}
