@@ -12,7 +12,7 @@ Order Complete | Chawnow | Online Food Ordering
 				Please keep this order number safe as it will used to resolve issues with your order.
 			</p>
 
-			<a href="/" class="ui-btn btn-warning">Find more food</a>
+			<a href="/" class="ui-btn btn-warning" data-ajax="false">Find more food</a>
 			<p>Thanks for using Chawnow.</p>
 		</div>
 	</div>
