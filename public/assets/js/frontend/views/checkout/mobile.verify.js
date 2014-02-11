@@ -56,6 +56,8 @@ Chawnow.Views.VerificationPage = Backbone.View.extend({
 		}
 		else if(response.status == "error")
 		{
+			view.ui.btn.html('Verify Order');
+			view.ui.btn.prop('disabled', false);
 			alert(response.message);
 		}
 	},
