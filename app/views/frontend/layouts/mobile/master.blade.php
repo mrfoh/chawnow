@@ -30,7 +30,7 @@
 				   <li><a href="/logout" data-ajax="false">Logout</a></li>
 				   @endif
 				   <li><a href="/contact" data-ajax="false">Contact Us</a></li>
-				   <li><a href="/faqs" data-ajax="false">Faqs</a></li>
+				   <li><a href="#" data-ajax="false">Faqs</a></li>
 			   </ul>
 			</div><!-- /panel -->
 

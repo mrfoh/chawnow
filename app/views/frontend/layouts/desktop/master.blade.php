@@ -34,7 +34,7 @@
 					<ul class="site-nav pull-right">
 						<li class="top-link"><a href="/" class="link">Home</a></li>
 						<li class="top-link"><a href="/how-it-works" class="link">How it works</a></li>
-						<li class="top-link"><a href="/help" class="link">Help</a></li>
+						<li class="top-link"><a href="#" class="link">Help</a></li>
 						@if(!$isLoggedin)
 						<li class="top-link"><a href="/signin" class="link">Sign In</a></li>
 						<li class="top-link"><a href="/signup" class="link">Sign Up</a></li>
@@ -73,20 +73,20 @@
 					<div class="company-box pull-left">
 						<h3>Chawnow</h3>
 						<ul class="list">
-							<li><a href="/about">About</a></li>
-							<li><a href="/contect">Contact Us</a></li>
-							<li><a href="/tos">Terms</a></li>
-							<li><a href="/privacy">Privacy Policy</a></li>
+							<li><a href="#">About</a></li>
+							<li><a href="#">Contact Us</a></li>
+							<li><a href="#">Terms</a></li>
+							<li><a href="#">Privacy Policy</a></li>
 						</ul>
 					</div>
 
 					<div class="social-box pull-left">
 						<h3>Connect with us</h3>
 						<ul>
-							<li><a href=""><i class="icon icon-facebook icon-large"></i></a></li>
-							<li><a href=""><i class="icon icon-twitter icon-large"></i></a></li>
-							<li><a href=""><i class="icon icon-instagram icon-large"></i></a></li>
-							<li><a href=""><i class="icon icon-tumblr icon-large"></i></a></li>
+							<li><a href="#"><i class="icon icon-facebook icon-large"></i></a></li>
+							<li><a href="#"><i class="icon icon-twitter icon-large"></i></a></li>
+							<li><a href="#"><i class="icon icon-instagram icon-large"></i></a></li>
+							<li><a href="#"><i class="icon icon-tumblr icon-large"></i></a></li>
 						</ul>
 					</div>
 				</div>
