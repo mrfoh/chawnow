@@ -23,9 +23,9 @@ Chawnow.data = {
 }
 </script>
 <script type="text/template" id="menu-tmpl">
-<a class="menu" data-id="<%= id %>" data-toggle="collapse" data-parent="#menus-list" href="#<%= name %>-categories"><%= name %></a>
+<a class="menu" data-id="<%= id %>" data-toggle="collapse" data-parent="#menus-list" href="#<%= slug %>-categories"><%= name %></a>
 <% if(categories) { %>
-	<ul class="categories collapse" id="<%= name %>-categories" data-menu-id="<%=id %>">
+	<ul class="categories collapse" id="<%= slug %>-categories" data-menu-id="<%=id %>">
 	<% _.each(categories, function(category) { %>
 		<li><a class="menu-category" href="" data-category="<%= category.name %>"><%= category.name %></a></li>
 	<% }); %>

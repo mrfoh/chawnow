@@ -11304,6 +11304,15 @@ you can use the generic selector below, but it's slower:
 .icon-custom-alert:before {
   content: "\e017";
 }
+#dashboard .call-to-action .image {
+  padding: 30px;
+}
+#dashboard .call-to-action .image a {
+  display: block;
+  color: #333;
+  text-align: center;
+  padding: 30px 20px;
+}
 #menus-app .menu-list {
   margin: 0;
   padding: 0;
@@ -11390,6 +11399,15 @@ you can use the generic selector below, but it's slower:
   color: #333;
   padding: 5px 10px;
   font-size: 1em;
+}
+#menus-app .menu-items-empty {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  text-align: center;
+}
+#menus-app .menu-items-empty h3 {
+  font-size: 2.5em;
 }
 #hours-app .control-group {
   float: left;

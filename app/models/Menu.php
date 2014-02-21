@@ -1,7 +1,7 @@
 <?php
 	class Menu extends Eloquent
 	{
-		protected $fillable = array('name','restaurant_id','active');
+		protected $fillable = array('name','slug','restaurant_id','active');
 
 		public function restaurant()
 		{

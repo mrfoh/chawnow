@@ -43,11 +43,14 @@ define(function() {
 
 		onRemoveMenuClick: function (event) {
 			var el = $(event.currentTarget),
-				id = el.attr('data-id');
+				id = el.attr('data-id'),
+				self = this;
 
 				this.model.destroy({
 					wait: true,
 					success: function (model, response) {
+						if(response.status == "success")
+							self.remove();
 					}
 				});
 
@@ -97,8 +100,9 @@ define(function() {
 		viewMenuItems: function (event) {
 
 			var el = $(event.currentTarget),
-				name = el.html();
+				name = el.attr('data-slug');
 
+			console.log(name);
 			var items = this.parent.$el.find('.menu-item[data-menu-name="'+name+'"]').parent('li'),
 				others = this.parent.$el.find('.menu-item').parent('li');
 

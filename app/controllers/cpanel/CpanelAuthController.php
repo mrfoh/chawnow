@@ -27,7 +27,15 @@
 			else 
 			{
 				//Check if user is on staff list
-				$user = Sentry::findUserByLogin(Input::get('email'));
+				try {
+					$user = Sentry::findUserByLogin(Input::get('email'));
+				}
+				catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+				{
+					Session::flash('message', 'Invalid email address');
+					return Redirect::to('login');
+				}
+				
 				$staff = RestaurantStaff::where('user_id','=',$user->id)->first();
 				if($staff)
 				{

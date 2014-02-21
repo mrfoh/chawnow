@@ -83,7 +83,7 @@
 					<div class="social-box pull-left">
 						<h3>Connect with us</h3>
 						<ul>
-							<li><a href="#"><i class="icon icon-facebook icon-large"></i></a></li>
+							<li><a href="http://facebook.com/chawnowofficial" target="_blank"><i class="icon icon-facebook icon-large"></i></a></li>
 							<li><a href="#"><i class="icon icon-twitter icon-large"></i></a></li>
 							<li><a href="#"><i class="icon icon-instagram icon-large"></i></a></li>
 							<li><a href="#"><i class="icon icon-tumblr icon-large"></i></a></li>

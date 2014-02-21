@@ -16,7 +16,7 @@
 	<% } else { %>
 		<a href="" data-id="<%= id %>" class="activate-menu"rel="tooltip" title="Click to activate menu"><div class="status-icon red"></div></a>
 	<% } %>
-	<a href="" class="view-menu"><%= name %></a>
+	<a href="" data-slug="<%= slug %>" class="view-menu"><%= name %></a>
 	<input type="text" class="name-inline-edit" data-id="<%= id %>">
 	<div class="actions">
 		<a href="" class="edit-menu" data-id="<%= id %>" rel="tooltip" title="Edit Menu"><i class="icon-pencil"></i></a>
@@ -25,7 +25,7 @@
 </div>
 </script>
 <script type="text/template" id="menu-item-tmpl">
-<div class="menu-item" data-menu-name="<%= menu.name %>">
+<div class="menu-item" data-menu-name="<%= menu.slug %>">
 	<div class="item-name">
 		<a href="" data-id="<%= id %>" rel="tooltip" title="Remove Item" class="remove-item"><i class="icon-remove"></i></a>
 		<a href="" data-id="<%= id %>" rel="tooltip" title="Edit Item" class="edit-item"><i class="icon-pencil"></i></a>
@@ -88,8 +88,6 @@
 				</div>
 
 				<div class="alert alert-info">
-					<button type="button" class="close" data-dismiss="alert"></button>
-					<p>Click on a menu to see its items</p>
 					<p><div class="status-icon green"></div> -  Active Menu</p>
 					<p><div class="status-icon red"></div> - Inactive Menu</p>
 				</div>
@@ -107,9 +105,9 @@
 			</div>
 
 			<div class="grid-body">
-				<ul class="item-list"></ul>
+				<ul class="item-list scroller" data-height="430px" data-always-visible="0"></ul>
 				<div class="menu-items-empty" style="display:none;">
-					<h3>No items created</h3>
+					<h3>No items have been created</h3>
 				</div>
 			</div>
 		</div>

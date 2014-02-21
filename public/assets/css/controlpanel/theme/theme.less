@@ -9,6 +9,24 @@
 @import 'responsive.less';
 @import 'custom-icon-set.less';
 
+#dashboard
+{
+	.call-to-action
+	{
+		.image
+		{
+			padding: 30px;
+			a
+			{
+				display: block;
+				color: #333;
+				text-align: center;
+				padding: 30px 20px;
+			}
+		}
+	}
+}
+
 #menus-app
 {
 	.menu-list
@@ -110,6 +128,15 @@
 				}
 			}
 		}
+	}
+
+	.menu-items-empty
+	{
+		position: absolute;
+		top: 30%;
+		left: 50%;
+		text-align: center;
+		h3 { font-size: 2.5em; }
 	}
 }
 

@@ -5,7 +5,7 @@
 	class Orders
 	{
 
-		public static function all($status, $perPage = 15)
+		public static function all($status, $perPage = 10)
 		{
 			if($status == "all")
 			{
@@ -46,7 +46,7 @@
 		* @param integer $perPage
 		* @return array
 		**/
-		public static function restaurant($restaurantid, $status, $perPage = 20)
+		public static function restaurant($restaurantid, $status, $perPage = 10)
 		{
 			if($status == "all")
 			{

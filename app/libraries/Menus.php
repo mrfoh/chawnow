@@ -2,6 +2,31 @@
 	
 	class Menus
 	{
+		private static function slugify($text)
+		{ 
+		  // replace non letter or digits by -
+		  $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+		  // trim
+		  $text = trim($text, '-');
+
+		  // transliterate
+		  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+		  // lowercase
+		  $text = strtolower($text);
+
+		  // remove unwanted characters
+		  $text = preg_replace('~[^-\w]+~', '', $text);
+
+		  if (empty($text))
+		  {
+		    return 'n-a';
+		  }
+
+		  return $text;
+		}
+
 		private static function formatMenuArray($menu)
 		{
 			$data = array();
@@ -9,6 +34,7 @@
 			$data['id'] = $menu->id;
 			$data['restaurant_id'] = $menu->restaurant_id;
 			$data['name'] = $menu->name;
+			$data['slug'] = $menu->slug;
 			$data['items'] = $menu->items->toArray();
 			$data['categories'] = $menu->categories->toArray();
 			$data['active'] = (bool) $menu->active;
@@ -251,6 +277,7 @@
 			$menu = new Menu;
 
 			$menu->name = $name;
+			$menu->slug = self::slugify($name);
 			$menu->restaurant_id = $id;
 			$menu->active = $active;
 
@@ -276,6 +303,7 @@
 			if($menu)
 			{
 				$menu->name = $name;
+				$menu->slug = self::slugify($name);
 
 				if($menu->save())
 					return self::formatMenuArray($menu);

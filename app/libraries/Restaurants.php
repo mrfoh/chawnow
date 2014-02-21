@@ -93,4 +93,18 @@
 			else
 				return false;							  
 		}
+
+		public static function setupProgress($id)
+		{
+			$menus = Menus::all($id);
+			$items = Menus::allItems($id);
+
+			$menusCreated = ($menus) ? true : false;
+			$menuItemsCreated = ($items) ? true : false;
+
+			return array(
+				'menusCreated' => $menusCreated,
+				'menuItemsCreated' => $menuItemsCreated
+			);
+		}
 	}
