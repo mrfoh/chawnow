@@ -47,7 +47,7 @@
 		</div>
 	</div>
 @endif
-	
+	<!--
 	<div class="span4">
 		<div class="tiles blue added-margin">
 			<div class="tiles-body">
@@ -112,6 +112,6 @@
 			</div>
 		</div>
 	</div>
-	
+	-->
 </div>
 @stop
