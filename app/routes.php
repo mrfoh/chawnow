@@ -46,6 +46,7 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 	Route::get('staff', 'CpanelStaffController@index');
 
 	//Analytics
+	Route::get('analytics/test', 'CpanelAnaylticsController@test');
 	Route::get('analytics', 'CpanelAnaylticsController@index');
 
 	//User
@@ -190,6 +191,10 @@ Route::get('logout', function() {
 	Session::flash('message','You have successfully been logged out of your account');
 
 	return Redirect::to('signin');
+});
+
+Route::get('test', function() {
+	Log::info(Analytics::getAllSitesIds());
 });
 
 Route::get('/', 'PagesController@home');

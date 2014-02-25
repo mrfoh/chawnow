@@ -115,6 +115,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
 		'Madlymint\Shpcart\ShpcartServiceProvider',
+		'Thujohn\Analytics\AnalyticsServiceProvider',
 	),
 
 	/*
@@ -181,6 +182,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Sentry'		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Shpcart' 		  => 'Madlymint\Shpcart\Facades\Shpcart',
+		'Analytics' 	  => 'Thujohn\Analytics\AnalyticsFacade',
 	),
 
 );

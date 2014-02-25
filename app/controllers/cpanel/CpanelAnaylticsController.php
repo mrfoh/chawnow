@@ -19,4 +19,9 @@
 			$this->viewdata['orders'] = $orders;
 			$this->layout->content = View::make('cpanel.analytics.index', $this->viewdata);
 		}
+
+		public function test()
+		{
+			print_r(Analytics::getAllSitesIds());
+		}
 	}

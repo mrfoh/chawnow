@@ -31,6 +31,7 @@ $env = $app->detectEnvironment(array(
 	'local' => array('http://localhost/chawnow','*.dev'),
 	'mobile' => array('192.168.137.1'),
 	'production' => array('chawnow.com','*.com'),
+
 ));
 
 /*
