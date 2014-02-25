@@ -41,7 +41,7 @@
 			      	<li><a href="/hours"><i class="icon-time"></i> <span class="title">Hours</span></a></li>
 			      	<li><a href="/account"><i class="icon-cogs"></i> <span class="title">Account Settings</span></a></li>
 			      	<li><a href="/staff"><i class="icon-group"></i> <span class="title">Staff</span></a></li>
-			      	<li><a href="/reports"><i class="icon-custom-chart"></i> <span class="title">Reports &amp; Analytics</span></a></li>
+			      	<li><a href="/analytics"><i class="icon-custom-chart"></i> <span class="title">Reports &amp; Analytics</span></a></li>
 				</ul>
 
 				<a href="#" class="scrollup">Scroll</a>
@@ -69,7 +69,6 @@
 		Cpanel.Constants = {
 			url : "http://{{ Config::get('app.cpanel_url') }}"
 		}
-		Cpanel.Views = Cpanel.Views || {};
 	</script>
 
 	<!-- Core Scripts -->
@@ -77,8 +76,17 @@
 	{{ HTML::script('assets/js/libs/jquery.ui.js') }}
 	{{ HTML::script('assets/js/plugins/backend.min.js') }}
 	{{ HTML::script('assets/js/libs/backbone/underscore-min.js') }}
-	{{ HTML::script('assets/js/libs/backbone/backbone-min.js') }}
+	{{ HTML::script('assets/js/libs/backbone/backbone-min.js')  }}
 
+	<!-- Core Code Snippets -->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.page-sidebar ul li a').each(function() {
+			if($(this).attr('href') == window.location.pathname)
+				$(this).parent('li').addClass('active');
+		});
+	});
+	</script>
 	<!-- Page Scripts -->
 	@yield('scripts')
 	</body>

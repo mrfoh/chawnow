@@ -142,16 +142,8 @@
 				//update the user
 				if($user->save())
 				{
-					$groups = $user->getGroups();
-					$group = $groups[0]->id;
-					if($group != Input::get('group'))
-					{
-						$oldgroup = Sentry::findGroupById($group);
-						$user->removeGroup($group);
-
-						$newgroup = Sentry::findGroupById((int) Input::get('group'));
-						$user->addGroup($newgroup);
-					}
+					$newgroup = Sentry::findGroupById((int) Input::get('group'));
+					$user->addGroup($newgroup);
 
 					return Redirect::to('users');
 				}

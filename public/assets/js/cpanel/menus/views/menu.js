@@ -22,7 +22,6 @@ define(function() {
 
 		render: function() {
 			this.$el.html( this.template( this.model.toJSON() ) );
-			//this.$el.find('a[rel="tooltip"]').tooltip();
 			return this;
 		},
 

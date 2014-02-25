@@ -58,11 +58,18 @@ Route::filter('cpanel_auth', function()
 		$user = Sentry::getUser();
 		//get restaurant staff group
 		$staff = Sentry::findGroupByName('Restaurant Staff');
+		//get restaurant admin group
+		$admin = Sentry::findGroupByName('Restaurant Admin');
 		//if user is not in the group
-		if(!$user->inGroup($staff))
+		if(!$user->inGroup($admin))
 		{
-			Session::flash('message', 'Access denied, incorrect permissions');
-			return Redirect::to('login');
+			if(!$user->inGroup($staff))
+			{
+				Session::flash('message', 'Access denied, incorrect permissions');
+				Sentry::logout();
+
+				return Redirect::to('login');
+			}	
 		}
 	}
 	else

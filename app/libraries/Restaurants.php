@@ -107,4 +107,69 @@
 				'menuItemsCreated' => $menuItemsCreated
 			);
 		}
+
+		private static function formatStaff($staff)
+		{
+			if($staff)
+			{
+				foreach($staff as $restaurantStaff)
+				{
+					foreach($restaurantStaff->user->groups as $userGroup)
+					{
+						if($userGroup->name == "Restaurant Admin")
+							$restaurantStaff->isAdmin = true;
+						else
+							$restaurantStaff->isAdmin = false;
+					}
+				}
+
+				return $staff;
+			}
+		}
+
+		public static function getStaff($id, $user_id)
+		{
+			$relationships = array('user','user.profile','user.groups');
+			$staff = RestaurantStaff::with($relationships)
+									->where('restaurant_id', '=', $id)
+									->where('user_id','=', $user_id)
+									->first();
+
+
+			foreach($staff->user->groups as $userGroup)
+			{
+				if($userGroup->name == "Restaurant Admin")
+					$staff->isAdmin = true;
+				else
+				   $staff->isAdmin = false;
+			}
+
+			return $staff;
+		}
+
+		public static function staff($id)
+		{
+			$relationships = array('user','user.profile','user.groups');
+			$staff = RestaurantStaff::with($relationships)->where('restaurant_id','=', $id)->get();
+
+			return self::formatStaff($staff);
+		}
+
+		public static function removeStaff($id, $user_id)
+		{	
+			$user = Sentry::findUserById($id);
+			$staff = RestaurantStaff::where('user_id','=', $user_id)->where('restaurant_id','=', $id)->first();
+
+			if($staff)
+			{
+				$user->delete();
+				$staff->delete();
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}

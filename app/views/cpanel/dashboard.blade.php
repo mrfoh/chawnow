@@ -96,21 +96,22 @@
 
 				<div class="notification-messages info clearfix">
 					<div class="message-wrapper">
-						<div class="heading">New order from - John Doe</div>
+						<div class="heading">New order from - Jane Smith</div>
 						<div class="description">1 x Pepperoni Pizza</div>
 					</div>
-					<div class="date pull-right">5 Minutes ago</div>
+					<div class="date pull-right">10 Minutes ago</div>
 				</div>
 
 				<div class="notification-messages info clearfix">
 					<div class="message-wrapper">
-						<div class="heading">New order from - John Doe</div>
+						<div class="heading">New order from - Mike Tyson</div>
 						<div class="description">1 x Pepperoni Pizza</div>
 					</div>
-					<div class="date pull-right">5 Minutes ago</div>
+					<div class="date pull-right">20 Minutes ago</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </div>
 @stop

@@ -35,6 +35,8 @@
 				$restaurant = Restaurants::findByStaffId($user->id);
 				//set restaurant
 				$this->restaurant = $restaurant;
+				//set user
+				$this->user = $user;
 				//Global view data
 				View::share('firstname',$user->first_name);
 				View::share('lastname', $user->last_name);

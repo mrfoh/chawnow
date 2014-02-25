@@ -55,6 +55,8 @@
 							<div class="iconset top-settings-dark "></div> 	
 						</a>
 						<ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu">
+						  <li><a href="/user"><i class="icon-user"></i>&nbsp;&nbsp;{{ $firstname }} {{ $lastname }}</a></li>
+						  <li><a href="/user/change-password"><i class="icon-lock"></i>&nbsp;&nbsp;Change Password</a></li>
 		                  <li><a href="/logout"><i class="icon-off"></i>&nbsp;&nbsp;Log Out</a></li>
 		               </ul>
 					</li> 

@@ -100,6 +100,17 @@
 		<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="{{ URL::to("assets/js/libs/jquery.js") }}">\x3C/script>')</script>
+		<!-- Google Analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-48404399-1', 'chawnow.com');
+		  ga('send', 'pageview');
+
+		</script>
 		{{ HTML::script('assets/js/bootstrap.min.js') }}
 		{{ HTML::script('assets/js/libs/backbone/underscore-min.js') }}
 		{{ HTML::script('assets/js/libs/backbone/backbone-min.js') }}

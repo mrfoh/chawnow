@@ -103,6 +103,22 @@ $(document).ready(function (){
 					</div>
 
 					<div class="control-group">
+						<label class="control-label">Email</label>
+						<span class="help">Restaurant's contact email</span>
+						<div class="controls">
+							<input class="span6" type="text" name="email" id="email" value="{{ ($restaurant) ? $restaurant->email : '' }}">
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label">Phone</label>
+						<span class="help">Restaurant's contact phone number</span>
+						<div class="controls">
+							<input class="span6" type="text" name="phone" id="phone" value="{{ ($restaurant) ? $restaurant->phone : '' }}">
+						</div>
+					</div>		
+
+					<div class="control-group">
 						<label class="control-label">Description</label>
 						<div class="controls">
 							<textarea class="span9" name="bio" id="bio" rows="3">{{ ($restaurant) ? $restaurant->bio : '' }}</textarea>

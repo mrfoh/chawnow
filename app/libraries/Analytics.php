@@ -5,5 +5,5 @@
 	**/
 	class Analytics
 	{
-		
+			
 	}

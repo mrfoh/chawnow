@@ -131,6 +131,8 @@
 				$restaurant->city_id = Input::get('city');
 				$restaurant->area_id = Input::get('area');
 				$restaurant->address = Input::get('address');
+				$restaurant->email = Input::get('email');
+				$restaurant->phone = Input::get('phone');
 				$restaurant->bio = Input::get('bio');
 
 				if($restaurant->save())
@@ -193,6 +195,8 @@
 				$restaurant->city_id = Input::get('city');
 				$restaurant->area_id = Input::get('area');
 				$restaurant->address = Input::get('address');
+				$restaurant->email = Input::get('email');
+				$restaurant->phone = Input::get('phone');
 				$restaurant->bio = Input::get('bio');
 
 				if($restaurant->save())

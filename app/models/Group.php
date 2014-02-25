@@ -4,6 +4,6 @@
 	{
 		public function users() 
 		{
-			return $this->belongsToMany('User');
+			return $this->belongsToMany('User','users_groups');
 		}
 	}

@@ -216,6 +216,46 @@
 	}
 }
 
+#staff-app
+{
+	.staff-list
+	{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li
+		{
+			position: relative;
+			background: #F5F5F5;
+			border-bottom: solid 1px #E6E6E6;
+			.transition(background, 0.2s, ease-in);
+			&:last-child { border-bottom: none;}
+			&:hover {
+				background: #EBEBEB;
+			}
+			.staff
+			{
+				position: relative;
+				padding: 0 10px;
+				p {
+					margin: 0;
+				}
+				.staff-name {
+					padding: 10px 0px;
+					color: #333;
+				}
+
+				.staff-actions {
+					position: absolute;
+					top: 10px;
+					right: 20px;
+				}
+			}
+		}
+	}
+}
+
 @media print
 {
 	body * { visibility: hidden; }

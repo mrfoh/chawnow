@@ -28,6 +28,14 @@ Backend.Views.RestuarantFormView = Backbone.View.extend({
 			required: true,
 			number: true
 		},
+		email: {
+			required: true,
+			email: true
+		},
+		phone: {
+			required: true,
+			number: true
+		},
 		delivery_fee: {
 			number: true
 		}

@@ -41,7 +41,18 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 	Route::get('account', 'CpanelAccountController@index');
 
 	//Staff
+	Route::post('staff/add', 'CpanelStaffController@add');
+	Route::get('staff/{id}/remove', 'CpanelStaffController@remove');
 	Route::get('staff', 'CpanelStaffController@index');
+
+	//Analytics
+	Route::get('analytics', 'CpanelAnaylticsController@index');
+
+	//User
+	Route::get('user' , 'CpanelUserController@index');
+	Route::post('user/update', 'CpanelUserController@updateUser');
+	Route::get('user/change-password', 'CpanelUserController@showPasswordForm');
+	Route::post('user/change-password', 'CpanelUserController@changePassword');
 
 	//Authentication routes
 	Route::get('login', 'CpanelAuthController@showLogin');
