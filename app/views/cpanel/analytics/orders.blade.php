@@ -1,5 +1,5 @@
 @section('title')
-{{ $restaurantData->name }} | Analytics
+{{ $restaurantData->name }} | Analytics | Orders
 @stop
 
 @section('content')
@@ -8,6 +8,8 @@
 </div>
 
 <div class="row-fluid" id="">
-	
+	<pre>
+		<?php print_r($orders) ?>
+	</pre>
 </div>
 @stop

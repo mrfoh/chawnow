@@ -2,7 +2,7 @@
 	
 	class CartController extends Controller 
 	{
-		public function addItem()
+		public function add()
 		{
 			$name = Input::get('name');
 			$price = Input::get('price');

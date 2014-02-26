@@ -41,7 +41,11 @@
 			      	<li><a href="/hours"><i class="icon-time"></i> <span class="title">Hours</span></a></li>
 			      	<li><a href="/account"><i class="icon-cogs"></i> <span class="title">Account Settings</span></a></li>
 			      	<li><a href="/staff"><i class="icon-group"></i> <span class="title">Staff</span></a></li>
-			      	<li><a href="/analytics"><i class="icon-custom-chart"></i> <span class="title">Reports &amp; Analytics</span></a></li>
+			      	<li><a href="javascript:;"><i class="icon-custom-chart"></i> <span class="title">Reports &amp; Analytics</span> <span class="arrow"></span></a>
+			      		<ul class="sub-menu">
+			      			<li><a href="/analytics/orders">Orders</a></li>
+			      		</ul>
+			      	</li>
 				</ul>
 
 				<a href="#" class="scrollup">Scroll</a>

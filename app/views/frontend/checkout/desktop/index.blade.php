@@ -147,7 +147,7 @@ Chawnow.data = {
 
 				<div class="cart-total clearfix">
 					<div class="pull-left"><strong>Total</strong></div>
-					<div class="pull-right"><b class="naira">N</b>{{ number_format($total,2) }}</div>
+					<div class="pull-right grand-total"><b class="naira">N</b>{{ number_format($total,2) }}</div>
 				</div>
 
 				<div class="inner">

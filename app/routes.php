@@ -46,8 +46,7 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 	Route::get('staff', 'CpanelStaffController@index');
 
 	//Analytics
-	Route::get('analytics/test', 'CpanelAnaylticsController@test');
-	Route::get('analytics', 'CpanelAnaylticsController@index');
+	Route::get('analytics/orders', 'CpanelAnaylticsController@orders');
 
 	//User
 	Route::get('user' , 'CpanelUserController@index');
@@ -118,6 +117,10 @@ Route::group(array("domain" => Config::get('app.backend_url')), function()
 	Route::get('cuisines/remove/{id}', 'BackendCuisineController@remove');
 	Route::post('cuisines/add', 'BackendCuisineController@add');
 
+	//Analytics
+	Route::get('analytics/orders', 'BackendAnalyticsController@orders');
+	Route::get('analytics', 'BackendAnalyticsController@index');
+
 	//upload controller
 	Route::any('upload','UploadController@index');
 
@@ -143,10 +146,11 @@ Route::group(array("domain" => Config::get('app.backend_url')), function()
 Route::get('restaurant/{slug}', 'RestaurantController@index');
 
 //Cart
-Route::post('cart/add', 'CartController@addItem');
-Route::get('cart/clear', 'CartController@clear');
 Route::get('cart/item/reduce-qty/{rowid}', 'CartController@reduceItemQty');
 Route::get('cart/item/increase-qty/{rowid}', 'CartController@increaseItemQty');
+Route::get('cart/clear', 'CartController@clear');
+Route::post('cart/add', 'CartController@add');
+
 
 //checkout
 Route::get('checkout/{slug}', 'CheckoutController@index');
@@ -191,10 +195,6 @@ Route::get('logout', function() {
 	Session::flash('message','You have successfully been logged out of your account');
 
 	return Redirect::to('signin');
-});
-
-Route::get('test', function() {
-	Log::info(Analytics::getAllSitesIds());
 });
 
 Route::get('/', 'PagesController@home');

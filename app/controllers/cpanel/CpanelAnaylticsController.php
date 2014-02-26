@@ -4,24 +4,16 @@
 
 	class CpanelAnaylticsController extends CpanelController
 	{
-		public function index()
+		public function orders()
 		{
-			$carbon = new Carbon;
-			$range = $carbon::now()->subMonth();
-
-			$orders = Order::where('created_at' ,'>=', $range)
-							->groupBy('date')
-							->orderBy('date', 'desc')
-							->get(array(
-								DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
-
+			$orders = SysAnalytics::queryOrders($this->restaurant->id);
 			$this->viewdata['orders'] = $orders;
-			$this->layout->content = View::make('cpanel.analytics.index', $this->viewdata);
+
+			$this->layout->content = View::make('cpanel.analytics.orders', $this->viewdata);
 		}
 
 		public function test()
 		{
-			print_r(Analytics::getAllSitesIds());
+			
 		}
 	}

@@ -38,7 +38,11 @@
 			      	</li>
 			      	<li><a href="/orders"><i class="icon-shopping-cart"></i> <span class="title">Orders</span></a></li>
 			      	<li><a href="/locations"><i class="icon-map-marker"></i> <span class="title">Locations</span></a></li>
-			      	<li><a href="/reports"><i class="icon-custom-chart"></i> <span class="title">Reports &amp; Analytics</span></a></li>
+			      	<li><a href="javascript:;"><i class="icon-custom-chart"></i> <span class="title">Reports &amp; Analytics</span> <span class="arrow"></span></a>
+			      		<ul class="sub-menu">
+			      			<li><a href="/analytics/orders">Orders</a></li>
+			      		</ul>
+			      	</li>
 				</ul>
 
 				<a href="#" class="scrollup">Scroll</a>
