@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="description" content="@yield('description')">
-		<meta name="keywords" content="Chawnow, ChawNow, delivery, order, food, nigeria, 'port-harcourt' ng, online", 'PHC'>
-		<meta name="description" content="Order from the best local restaurants in Port-Harcourt, Nigeria • Select your food from a large choice : pizza, sushi, American food... •  Fast and convenient •  Cash on delivery.
+		<meta name="keywords" content="Chawnow, Chawow.com, delivery, order, food, nigeria, 'port-harcourt' ng, online, PH, PHC", >
+		<meta name="description" content="Order food from the best local restaurants in Port-Harcourt, Nigeria • Select your food from a large choice : pizza, sushi, American food... •  Fast and convenient •  Cash on delivery.
 "> 
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta property="og:url" content="http://www.chawnow.com/" />
@@ -73,8 +73,8 @@
 					<div class="company-box pull-left">
 						<h3>Chawnow</h3>
 						<ul class="list">
-							<li><a href="#">About</a></li>
-							<li><a href="#">Contact Us</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/contact">Contact Us</a></li>
 							<li><a href="#">Terms</a></li>
 							<li><a href="#">Privacy Policy</a></li>
 						</ul>
@@ -84,7 +84,7 @@
 						<h3>Connect with us</h3>
 						<ul>
 							<li><a href="http://facebook.com/chawnowofficial" target="_blank"><i class="icon icon-facebook icon-large"></i></a></li>
-							<li><a href="#"><i class="icon icon-twitter icon-large"></i></a></li>
+							<li><a href="http://twitter.com/chawnow" target="_blank"><i class="icon icon-twitter icon-large"></i></a></li>
 							<li><a href="#"><i class="icon icon-instagram icon-large"></i></a></li>
 							<li><a href="#"><i class="icon icon-tumblr icon-large"></i></a></li>
 						</ul>

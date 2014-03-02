@@ -1,0 +1,53 @@
+.contact-page
+{
+	background: url('@{imagepath}/process.jpg') no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+
+	.contact-page-content {
+		width: 90%;
+		margin: 0 auto;
+		margin-bottom: 10px;
+	}
+
+	.contact-details, .contact-form {
+		.box-sizing(border-box);
+		padding: 20px;
+	}
+
+	.contact-details {
+		width: 65%;
+		.dept-contact {
+			p { font-size: 1.3em; a { color: #333; } }
+		}
+
+		.customer-group-contact {
+			background: url("@{imagepath}/searchform-bg.png") repeat;
+			margin-bottom: 10px;
+			.border-radius(10px);
+
+			h3 { margin: 0; padding: 10px 20px; }
+			img {
+				width: 100px;
+				height: 100px;
+				padding: 10px;
+			}
+
+			.can-do {
+				padding: 0px 20px;
+				&.contact-info {
+					background: #FFF;
+					padding-top: 10px;
+					.border-radius(5px);
+				}
+			}
+		}
+	}
+
+	.contact-form {
+		width: 35%;
+		background: url("@{imagepath}/red-noise-bg.png") repeat;
+		color: #FFF;
+	}
+}

@@ -4,10 +4,6 @@ Chawnow | Online Food Ordering |  How it works
 
 @section('page_class') howitworks-page @stop
 
-@section('description')
-Order from the best local restaurants • Select your food from a large choice : pizza, sushi, American food... •  Fast and convenient •  Cash on delivery.
-@stop
-
 @section('content')
 <div class="page-content container">
 	<div class="row">

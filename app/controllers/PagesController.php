@@ -25,6 +25,11 @@
 			$this->layout->content = View::make($this->viewpath('frontend.pages.home'), $this->viewdata);
 		}
 
+		public function about()
+		{
+			$this->layout->content = View::make($this->viewpath('frontend.pages.about'), $this->viewdata);
+		}
+
 		public function howItWorks()
 		{
 			$this->layout->content = View::make($this->viewpath('frontend.pages.howitworks'), $this->viewdata);

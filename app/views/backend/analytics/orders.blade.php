@@ -9,10 +9,14 @@ Admin | Analytics | Orders
 <script type="text/javascript">
 Backend.data = { 
 	orders: { 
-		month: {{ json_encode($orders) }},
-		week: [],
-		day: []
-	} 
+		month: {{ json_encode($orders['month']) }},
+		week: {{ json_encode($orders['week']) }}
+	},
+
+	distribution: {
+		month: {{ json_encode($orderDistribution['month']) }},
+		week: {{ json_encode($orderDistribution['week']) }}
+	}
 };
 $(document).ready(function (){
 	var View = new Backend.Views.OrderAnalyticsView();
@@ -26,14 +30,15 @@ $(document).ready(function (){
 <div class="row-fluid" id="order-analytics">
 
 	<div class="span12">
+
 		<div class="grid simple">
 			<div class="grid-title clearfix">
 				<h4 class="pull-left">Orders Overview</h4>
 				<div class="pull-right">
 					<div class="btn-group">
-						<button class="btn btn-white active">Month</button>
-						<button class="btn btn-white">Week</button>
-						<button class="btn btn-white">Day</button>
+						<button class="change-data btn btn-white active" data-value="month" type="button">Month</button>
+						<button class="change-data btn btn-white" data-value="week" type="button">Week</button>
+						<!--<button class="change-data btn btn-white" data-value="day" type="button">Day</button>-->
 					</div>
 				</div>
 			</div>
@@ -54,6 +59,15 @@ $(document).ready(function (){
 				</div>
 
 				<div id="order-chart"></div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="span6">
+		<div class="grid simple">
+			<div class="grid-body">
+				<div style="height: 200px;" id="order-distribution"></div>
 			</div>
 		</div>
 	</div>

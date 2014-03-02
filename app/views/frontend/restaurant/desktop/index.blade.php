@@ -4,10 +4,6 @@
 
 @section('page_class') restaurant-page @stop
 
-@section('description')
-Order from {{ $restaurant->name }} . Order from the best local restaurants • Select your food from a large choice : pizza, sushi, American food... •  Fast and convenient •  Cash on delivery.
-@stop
-
 @section('scripts')
 <script type="text/javascript">
 Chawnow.data = {
@@ -37,7 +33,7 @@ Chawnow.data = {
 	<div class="item-name pull-left"><%= name %></div>
 	<div class="item-price pull-right">
 		<span><b class="naira">N</b><%= price %></span>
-		<button class="btn btn-sm btn-warning add-to-cart" data-id="<%= id %>" data-item-name="<%= name %>" data-item-price="<%= price %>"><i class="icon-plus-sign icon-large"></i></button>
+		<button title="Click to add this to your order" class="btn btn-sm btn-warning add-to-cart" data-id="<%= id %>" data-item-name="<%= name %>" data-item-price="<%= price %>"><i class="icon-plus-sign icon-large"></i></button>
 	</div>
 </div>
 </script>

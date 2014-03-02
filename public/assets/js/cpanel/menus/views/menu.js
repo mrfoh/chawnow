@@ -45,13 +45,17 @@ define(function() {
 				id = el.attr('data-id'),
 				self = this;
 
-				this.model.destroy({
-					wait: true,
-					success: function (model, response) {
-						if(response.status == "success")
-							self.remove();
-					}
-				});
+				var confirm = window.confirm("Are you sure you want to delete this menu");
+				
+				if(confirm) {
+					this.model.destroy({
+						wait: true,
+						success: function (model, response) {
+							if(response.status == "success")
+								self.remove();
+						}
+					});
+				}
 
 			event.preventDefault();
 		},

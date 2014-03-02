@@ -4,10 +4,6 @@ Chawnow | Online Food Ordering
 
 @section('page_class') search-results-page @stop
 
-@section('description')
-Order from the best local restaurants • Select your food from a large choice : pizza, sushi, American food... •  Fast and convenient •  Cash on delivery.
-@stop
-
 @section('scripts')
 {{ HTML::script('assets/js/frontend/views/search/index.js') }}
 <script type="text/javascript">
@@ -101,7 +97,7 @@ $(document).ready(function() {
 							</ul>
 						</div>
 						<div class="pull-right extra">
-							<a href="{{ URL::to('restaurant/'.$result->slug) }}" class="btn btn-info btn-lg menu-link">Go to menu <i class="icon icon-caret-right icon-large"></i></a>
+							<a href="{{ URL::to('restaurant/'.$result->slug) }}" class="btn btn-warning btn-lg menu-link">Go to menu <i class="icon icon-caret-right icon-large"></i></a>
 						</div>
 					</div>
 					<div class="item-status clearfix">

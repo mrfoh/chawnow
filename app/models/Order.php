@@ -16,6 +16,16 @@
 			"verification_code"
 		);
 
+		public function next()
+		{
+			return static::where('id', '>', $this->id)->first();
+		}
+
+		public function previous()
+		{
+			return static::where('id', '<', $this->id)->first();
+		}
+		
 		public function items() {
 
 			return $this->hasMany('OrderItem');

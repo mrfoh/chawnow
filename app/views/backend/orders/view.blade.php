@@ -101,6 +101,23 @@ Admin | Orders | #{{ $order->id }}
 
 	<div class="span2">
 		<div class="invoice-button-action-set">
+			<?php
+				$next = $order->next();
+				$previous = $order->previous();
+			?>
+			<div class="btn-group" style="margin-bottom: 10px;">
+				@if($previous)
+			  	<a href="/orders/view/{{ $previous->id }}" class="btn btn-primary" rel="tooltip" title="Previous Order"><i class="icon-chevron-left"></i></a>
+			  	@else
+			  	<a href="#" class="btn btn-primary" rel="tooltip" title="Previous Order"><i class="icon-chevron-left"></i></a>
+			  	@endif
+
+			  	@if($next)
+			  	<a href="/orders/view/{{ $next->id }}" class="btn btn-primary" rel="tooltip" title="Next Order"><i class="icon-chevron-right"></i></a>
+			  	@else
+			  	<a href="#" class="btn btn-primary" rel="tooltip" title="Next Order"><i class="icon-chevron-right"></i></a>
+			  	@endif
+			</div>
 		  <p>
 		  	@if($order->status == "placed")
 		  	<button class="btn btn-default">Status: Placed</button>
@@ -114,8 +131,13 @@ Admin | Orders | #{{ $order->id }}
 		  </p>
 
           <p>
-            <button class="btn btn-primary" type="button"><i class="icon-print"></i> Print</button>
+            <button class="btn btn-primary" type="button" onclick="window.print()"><i class="icon-print"></i> Print</button>
           </p>
+          @if($order->status == "verified")
+          <p>
+		  	<a href="/orders/{{ $order->id }}/fulfill" class="btn btn-primary"><i class="icon-ok"></i> Fulfill Order</a>
+		  </p>
+		  @endif
         </div>
 	</div>
 </div>

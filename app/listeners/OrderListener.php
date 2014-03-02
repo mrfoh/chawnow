@@ -53,6 +53,7 @@
 				$message->to($order->restaurant->email, $order->restaurant->name)
 						->subject('New order #'.$order->id);
 			});
+
 			//Notify restaurant via sms	
 			foreach($order->items as $oitems)
 			{
@@ -61,6 +62,7 @@
 
 			$message = "New order. Order Type:".ucwords($order->type).",Customer Name:".$order->customer_name.",Customer Address:".$order->customer_address.",Customer Phone:".$order->customer_phone.". Customer Order: ".implode(",", $orderitems);
 			Log::info($message);
+			
 			$sms = new Sms;
 			$reciepent = $this->formatMobileNo($order->restaurant->phone);
 			$sendsms = $sms->sendMessage($reciepent, $message);

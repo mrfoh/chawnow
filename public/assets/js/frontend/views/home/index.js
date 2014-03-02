@@ -18,6 +18,8 @@ Chawnow.Views.Homepage = Backbone.View.extend({
 
 		this.cities.reset(cities);
 		this.areas.reset(areas);
+
+		$('.current').addClass('animated rubberBand');
 	},
 
 	populateCities: function() {

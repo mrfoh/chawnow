@@ -107,7 +107,6 @@ Route::group(array("domain" => Config::get('app.backend_url')), function()
 	Route::get('restaurants/{id}/delete', 'BackendRestaurantController@delete');
 
 	//Orders
-	//Orders
 	Route::get('orders/{status}', 'BackendOrderController@index');
 	Route::get('orders/view/{id}', 'BackendOrderController@view');
 	Route::get('orders', 'BackendOrderController@index@index');
@@ -174,20 +173,21 @@ Route::get('account/password', 'AccountController@password');
 Route::post('account/password', 'AccountController@changePassword');
 Route::get('account', 'AccountController@index');
 
+//Search
+Route::get('search', 'SearchController@lookUp');
+//Accounts
+Route::get('signin', 'UserController@showSignin');
+Route::get('signup', 'UserController@showSignup');
+Route::post('signin', 'UserController@signin');
+Route::post('signup', 'UserController@signup');
+
+Route::get('about', 'PagesController@about');
 //How it works
 Route::get('how-it-works', 'PagesController@howItWorks');
 //Contact
 Route::get('contact', 'PagesController@contact');
 //Faq
 Route::get('faq', 'PagesController@faq');
-//Search
-Route::get('search', 'SearchController@lookUp');
-
-//Accounts
-Route::get('signin', 'UserController@showSignin');
-Route::get('signup', 'UserController@showSignup');
-Route::post('signin', 'UserController@signin');
-Route::post('signup', 'UserController@signup');
 
 Route::get('logout', function() {
 	
@@ -196,5 +196,6 @@ Route::get('logout', function() {
 
 	return Redirect::to('signin');
 });
+
 
 Route::get('/', 'PagesController@home');

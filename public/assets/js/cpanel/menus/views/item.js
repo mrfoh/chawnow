@@ -25,10 +25,19 @@ define(function() {
 			var el = $(event.currentTarget),
 				id = el.attr('data-id');
 			var item = this.model;
+			var self = this;
 
-			this.model.destroy({
-				wait: true
-			})
+			var confirm = window.confirm("Are you sure you want to delete this item");
+
+			if(confirm) {
+				this.model.destroy({
+					wait: true,
+					success: function (model, response) {
+						if(response.status == "success")
+							self.remove();
+					}
+				});
+			}
 
 			event.preventDefault();
 		},
