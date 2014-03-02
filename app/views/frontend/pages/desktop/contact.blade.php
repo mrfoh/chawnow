@@ -26,7 +26,7 @@ Get in touch - Chawnow | Online Food Ordering
 
 						<div class="pull-left can-do contact-info">
 							<p>Email: <a href="">info@chawnow.com</a></p>
-							<p>Phone: 07031017543</p>
+							<p>Phone: 07031017543<br>07068181972</p>
 						</div>
 					</div>
 
@@ -36,9 +36,14 @@ Get in touch - Chawnow | Online Food Ordering
 							{{ HTML::image('assets/img/chef-icon-2x.png') }}
 						</div>
 						<div class="pull-left can-do">
-							<p>Want to list you restaurant on Chawnow</p>
+							<p>Get your restaurant on Chawnow</p>
 							<p>Help updating your menus</p>
 							<p>General account questions</p>
+						</div>
+
+						<div class="pull-left can-do contact-info">
+							<p>Email: <a href="">restaurants@chawnow.com</a></p>
+							<p>Phone: 07031017543<br>07068181972</p>
 						</div>
 					</div>
 
