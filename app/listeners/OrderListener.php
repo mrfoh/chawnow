@@ -80,7 +80,7 @@
 			
 			$sms = new Sms;
 			$reciepent = $this->formatMobileNo($order->restaurant->phone);
-			$sendsms = $sms->sendMessage($reciepent, $message);10,
+			$sendsms = $sms->sendMessage($reciepent, $message);
 		}
 
 		/**
