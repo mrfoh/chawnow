@@ -157,7 +157,7 @@
 			if($order->save())
 			{
 				//trigger order.placed event
-				Event::fire('order.placed', array("order_id"=>$order->id));
+				Event::fire('order.placed', array("orderid"=>$order->id));
 				//Session flash message
 				Session::flash('message', 'The verification message has been resent to you via email address and sms');
 

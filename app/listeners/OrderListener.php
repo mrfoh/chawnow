@@ -2,7 +2,12 @@
 
 	class OrderListener
 	{
-
+		/**
+		* Formats mobile numbers, add country code
+		* @access private
+		* @param string $no
+		* @return string
+		**/
 		private function formatMobileNo($no)
 		{
 			if($no)
@@ -17,7 +22,11 @@
 			}
 		}
 
-		public function placed($order_id)
+		/**
+		* Sends order verification message
+		* @param integer $orderid
+		**/
+		public function placed($orderid)
 		{
 			$order = Order::with('restaurant')->find($order_id);
 
@@ -31,7 +40,7 @@
 			$data['order'] = $order;
 
 			//Send mail
-			Mail::send('emails.orders.placed', $data, function($message) use ($order) {
+			Mail::later(10,'emails.orders.placed', $data, function($message) use ($order) {
 
 				$message->to($order->customer_email, $order->customer_name)
 						->subject('Order Verification');
@@ -43,13 +52,18 @@
 			$sendsms = $sms->sendMessage($reciepent, $message);
 		}
 
+		/**
+		* Sends order verification message to restaurant
+		* @param integer $orderid
+		**/
 		public function verified($orderid)
 		{
 			$order = Orders::get($orderid);
 
 			//Notify restaurant via email
 			$data['order'] = $order;
-			Mail::send('emails.orders.verified', $data, function($message) use ($order) {
+
+			Mail::later(10, 'emails.orders.verified', $data, function($message) use ($order) {
 
 				$message->to($order->restaurant->email, $order->restaurant->name)
 						->subject('New order #'.$order->id);
@@ -66,26 +80,33 @@
 			
 			$sms = new Sms;
 			$reciepent = $this->formatMobileNo($order->restaurant->phone);
-			$sendsms = $sms->sendMessage($reciepent, $message);
+			$sendsms = $sms->sendMessage($reciepent, $message);10,
 		}
 
+		/**
+		* Sends order confirmation message to restaurant
+		* @param integer $orderid
+		**/
 		public function confirm($orderid)
 		{
 			$order = Orders::get($orderid);
 
 			//Notify customer via email
 			$data['order'] = $order;
-			Mail::send('emails.orders.verified', $data, function($message) use ($order) {
+
+			Mail::later(10,'emails.orders.verified', $data, function($message) use ($order) {
 
 				$message->to($order->customer_email, $order->customer_name)
-						->subject('Order Confirmation'.$order->id);
+						->subject('Order Confirmation');
 			});
 
 			//Notify customer via sms
 			$message = "Thank you for verifying your order. A confirmation email has been sent to: ".$order->customer_email.
 			". Your order #".$order->id." will be delivered in:".$order->restaurant->meta->delivery_time.". Thank for using Chawnow :-)";
+
 			//Log message
 			Log::info($message);
+			
 			//Send Sms
 			$sms = new Sms;
 			$reciepent = $this->formatMobileNo($order->customer_phone);

@@ -4,6 +4,16 @@ Help And FAQs - Chawnow | Online Food Ordering
 
 @section('page_class') help-page @stop
 
+@section('scripts')
+{{ HTML::script('assets/js/frontend/views/help/index.js') }}
+<!--<script type="text/javascript" src="{{ cdn( '/assets/js/master.min.js' ) }}"></script>-->
+<script type="text/javascript">
+$(document).ready(function() {
+	var view = new Chawnow.Views.Helppage();
+});
+</script>
+@stop
+
 @section('content')
 <div class="page-content container">
 
