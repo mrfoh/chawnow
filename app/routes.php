@@ -187,7 +187,7 @@ Route::get('how-it-works', 'PagesController@howItWorks');
 //Contact
 Route::get('contact', 'PagesController@contact');
 //Faq
-Route::get('faq', 'PagesController@faq');
+Route::get('help', 'PagesController@faq');
 
 Route::get('logout', function() {
 	

@@ -62,7 +62,7 @@ Chawnow | Online Food Ordering |  How it works
 
 	<div class="row">
 		<div class="col-md-12 call-to-action clearfix">
-			<div class="pull-left"><h3>Own a restaurant and want to start take orders online?</h3></div>
+			<div class="pull-left"><h3>Own a restaurant and want to start taking orders online?</h3></div>
 			<div class="pull-right"><a href="/contact" class="btn btn-danger">Get in touch</a></div>
 		</div>
 	</div>

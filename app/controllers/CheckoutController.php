@@ -132,6 +132,7 @@
 			{
 				//fire event
 				Event::fire('order.verified', array("orderid"=>$id));
+				Event::fire('order.confirm', array("orderid"=>$id));
 				//return response
 				return Response::json(array('status'=>"success"));
 			}

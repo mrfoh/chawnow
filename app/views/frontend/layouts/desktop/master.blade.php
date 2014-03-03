@@ -34,7 +34,7 @@
 					<ul class="site-nav pull-right">
 						<li class="top-link"><a href="/" class="link">Home</a></li>
 						<li class="top-link"><a href="/how-it-works" class="link">How it works</a></li>
-						<li class="top-link"><a href="#" class="link">Help</a></li>
+						<li class="top-link"><a href="/help" class="link">Help</a></li>
 						@if(!$isLoggedin)
 						<li class="top-link"><a href="/signin" class="link">Sign In</a></li>
 						<li class="top-link"><a href="/signup" class="link">Sign Up</a></li>

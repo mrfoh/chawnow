@@ -33,7 +33,8 @@
 			//Send mail
 			Mail::send('emails.orders.placed', $data, function($message) use ($order) {
 
-				$message->to($order->customer_email, $order->customer_name)->subject('Order Verification');
+				$message->to($order->customer_email, $order->customer_name)
+						->subject('Order Verification');
 			});
 
 			//Send Sms
@@ -65,6 +66,29 @@
 			
 			$sms = new Sms;
 			$reciepent = $this->formatMobileNo($order->restaurant->phone);
+			$sendsms = $sms->sendMessage($reciepent, $message);
+		}
+
+		public function confirm($orderid)
+		{
+			$order = Orders::get($orderid);
+
+			//Notify customer via email
+			$data['order'] = $order;
+			Mail::send('emails.orders.verified', $data, function($message) use ($order) {
+
+				$message->to($order->customer_email, $order->customer_name)
+						->subject('Order Confirmation'.$order->id);
+			});
+
+			//Notify customer via sms
+			$message = "Thank you for verifying your order. A confirmation email has been sent to: ".$order->customer_email.
+			". Your order #".$order->id." will be delivered in:".$order->restaurant->meta->delivery_time.". Thank for using Chawnow :-)";
+			//Log message
+			Log::info($message);
+			//Send Sms
+			$sms = new Sms;
+			$reciepent = $this->formatMobileNo($order->customer_phone);
 			$sendsms = $sms->sendMessage($reciepent, $message);
 		}
 	}

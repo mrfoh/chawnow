@@ -8,14 +8,13 @@
 
 	<body>
 		<div class="container">
-			<h3>Hello, {{ $order->restaurant->name }}</h3>
+			<h3>Hello, {{ $order->customer_name }}</h3>
 			<h2>You have a new order</h2>
 			<div class="card-content">
 					<div class="clearfix" style="padding: 10px;">
 						<div class="pull-left">
 							<h3>Customer Info</h3>
 							<address>
-								{{ $order->customer_name }}, <br/>
 								{{ $order->customer_address }}, <br/>
 								{{ $order->restaurant->area->name }}, {{ $order->restaurant->city->name }}. <br/>
 								<abbr title="Phone">P:</abbr> {{ $order->customer_phone }} <br/>

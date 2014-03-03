@@ -1,0 +1,45 @@
+.help-page
+{
+	background: url('@{imagepath}/bg-pizza-2.jpg') no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+
+	.help-content
+	{
+		width: 80%;
+		margin: 0 auto;
+		margin-bottom: 20px;
+
+		.help-block {
+			width: 70%;
+			color: #333;
+			h2, h4 { margin: 0; padding: 10px 20px; }
+
+			.question-box {
+				padding: 10px 20px;
+				.question {
+					margin: 0;
+					font-weight: bold;
+					font-size: 1.2em;
+				}
+				.answer {
+					margin: 0;
+				}
+			}
+		}
+
+		.call-to-action {
+			width: 30%;
+			.box-sizing(border-box);
+			padding: 20px 10px;
+			.inner {
+				padding: 20px 10px;
+				.box-sizing(border-box);
+				background: url("@{imagepath}/red-noise-bg.png") repeat;
+				.border-radius(5px);
+				color: #FFF;
+			}
+		}
+	}
+}
