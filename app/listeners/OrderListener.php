@@ -94,7 +94,7 @@
 			//Notify customer via email
 			$data['order'] = $order;
 
-			Mail::later(10,'emails.orders.verified', $data, function($message) use ($order) {
+			Mail::later(10,'emails.orders.confirm', $data, function($message) use ($order) {
 
 				$message->to($order->customer_email, $order->customer_name)
 						->subject('Order Confirmation');
