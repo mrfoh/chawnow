@@ -28,7 +28,7 @@
 		**/
 		public function placed($orderid)
 		{
-			$order = Order::with('restaurant')->find($order_id);
+			$order = Order::with('restaurant')->find($orderid);
 
 			$message = "You placed order to ".$order->restaurant->name.". Your verification code is: ".$order->verification_code.". Use this code to
 			verfiy your order.";
