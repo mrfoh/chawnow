@@ -5,7 +5,7 @@ Admin | Analytics | Orders
 @section('scripts')
 {{ HTML::script('assets/js/plugins/raphael.min.js') }}
 {{ HTML::script('assets/js/plugins/morris.min.js') }}
-{{ HTML::script('assets/js/backend/views/analytics/orders.js') }}
+
 <script type="text/javascript">
 Backend.data = { 
 	orders: { 

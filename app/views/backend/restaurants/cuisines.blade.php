@@ -3,7 +3,6 @@ Admin | Cuisines
 @stop
 
 @section('scripts')
-{{ HTML::script('assets/js/backend/views/restaurants/cuisines.js') }}
 <script type="text/javascript">
 var cuisines = {{ json_encode($cuisines) }};
 $(document).ready(function (){

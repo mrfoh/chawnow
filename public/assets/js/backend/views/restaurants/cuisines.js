@@ -112,4 +112,4 @@ Backend.Views.CuisinesView = Backbone.View.extend({
 
 		this.ui.slug.val(slugval);
 	}
-});
+})

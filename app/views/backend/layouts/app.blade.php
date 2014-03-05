@@ -76,6 +76,7 @@
 	{{ HTML::script('assets/js/plugins/backend.min.js') }}
 	{{ HTML::script('assets/js/libs/backbone/underscore-min.js') }}
 	{{ HTML::script('assets/js/libs/backbone/backbone-min.js') }}
+	{{ HTML::script('assets/js/backend/backend.min.js') }}
 	@yield('scripts')
 	</body>
 </html>

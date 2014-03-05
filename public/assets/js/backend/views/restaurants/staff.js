@@ -127,4 +127,4 @@ Backend.Views.RestuarantStaffView = Backbone.View.extend({
 			alert(response.message);
 		}
 	}
-});
+})

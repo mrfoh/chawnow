@@ -295,4 +295,4 @@ Backend.Views.RestuarantFormView = Backbone.View.extend({
 
 		this.uploader.start();
 	}
-});
+})

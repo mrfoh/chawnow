@@ -3,7 +3,6 @@ Admin | Restuarants | {{ $restaurant->name }} | Staff
 @stop
 
 @section('scripts')
-{{ HTML::script('assets/js/backend/views/restaurants/staff.js') }}
 <script type="text/javascript">
 var staff = {{ json_encode($restaurant->staff->toArray()) }};
 var users = {{ json_encode($users) }};

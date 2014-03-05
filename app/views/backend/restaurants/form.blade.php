@@ -7,7 +7,6 @@ Admin | Restaurants | {{ ($action == "new") ? "New Restuarant" : "Edit Restauran
 {{ HTML::script('assets/js/plugins/plupload/plupload.full.min.js') }}
 {{ HTML::script('assets/js/plugins/jquery.validate.min.js') }}
 {{ HTML::script('assets/js/plugins/bootstrap-timepicker.min.js') }}
-{{ HTML::script('assets/js/backend/views/restaurants/form.js') }}
 <script type="text/javascript">
 var locales = {{ json_encode($locales) }};
 $(document).ready(function (){

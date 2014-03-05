@@ -90,4 +90,4 @@ Backend.Views.UserFormView = Backbone.View.extend({
 		this.setUpUi();
 		this.bindPlugins();
 	}
-});
+})
