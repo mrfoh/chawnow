@@ -308,4 +308,4 @@ define(function() {
 	});
 
 	return AppView;
-});
+})

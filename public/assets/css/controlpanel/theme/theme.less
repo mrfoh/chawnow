@@ -5,6 +5,7 @@
 @import 'plugins/bootstrap-select2/select2.less';
 @import '../../common/gritter/jquery.gritter.less';
 @import '../../common/pace.less';
+@import '../../common/morris.less';
 @import 'style.less';
 @import 'responsive.less';
 @import 'custom-icon-set.less';
@@ -251,6 +252,72 @@
 					top: 10px;
 					right: 20px;
 				}
+			}
+		}
+	}
+}
+
+#analytics-app
+{
+	.loading-screen
+	{
+		display: none;
+		background: #CCC;
+		padding: 20px;
+		text-align: center;
+		.loader
+		{
+			background: #FFF;
+			.border-radius(10px);
+			text-align: center;
+			margin: 100px auto;
+			width: 30%;
+
+			p {
+				display: block;
+				padding: 20px 0;
+				color: #333;
+				text-transform: uppercase;
+				font-weight: bold;
+			}
+		}
+	}
+
+	.no-data-screen
+	{
+		display: none;
+		background: #CCC;
+		padding: 20px;
+		text-align: center;
+		.message-box
+		{
+			background: #FFF;
+			.border-radius(10px);
+			text-align: center;
+			margin: 100px auto;
+			width: 30%;
+
+			p {
+				display: block;
+				padding: 20px 0;
+				color: #333;
+				text-transform: uppercase;
+				font-weight: bold;
+			}
+		}
+	}
+
+	.distribution-break-down
+	{
+		li {
+			display: inline-block;
+			float: left;
+			padding: 10px;
+			width: 35%;
+			font-size: 1.5em;
+
+			.label {
+				padding: 10px 15px;
 			}
 		}
 	}

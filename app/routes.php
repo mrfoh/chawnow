@@ -46,6 +46,8 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 	Route::get('staff', 'CpanelStaffController@index');
 
 	//Analytics
+	Route::get('analytics/orders/query', 'CpanelAnaylticsController@orderQuery');
+	Route::get('analytics/orders/distribution', 'CpanelAnaylticsController@orderDistributionQuery');
 	Route::get('analytics/orders', 'CpanelAnaylticsController@orders');
 
 	//User

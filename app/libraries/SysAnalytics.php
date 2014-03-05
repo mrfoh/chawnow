@@ -35,6 +35,8 @@
 		{
 			if($orders)
 			{
+				$data = array();
+
 				foreach ($orders as $order) {
 					if($range == "month" || $range == "week")
 						$data[] = array('day'=> date("Y-m-d", strtotime($order->created_at)), 'orders'=>$order->orders);
@@ -54,6 +56,7 @@
 		{
 			if($orders)
 			{
+				$data['all'] = array();
 				$data['fulfilled'] = array();
 				$data['verified'] = array();
 				$data['placed'] = array();
@@ -71,6 +74,7 @@
 				}
 
 				$distribution = array(
+					"all" => count($orders),
 					"fulfilled"=> count($data['fulfilled']),
 					"verified"=> count($data['verified']),
 					"placed"=> count($data['placed'])
@@ -99,49 +103,16 @@
 		{
 			$queryRange = self::dateRange($range);
 
-			if($status == "all")
-			{
-				$orders = Order::where('created_at' ,'>=', $queryRange)
-							    ->groupBy('date')
-							    ->orderBy('date', 'asc')
-							    ->get(array(
-								'status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
+			$orders = Order::where('created_at' ,'>=', $queryRange);
 
-			}
+			if($status != "all")
+				$orders->where('status','=', $status);
 
-			elseif ($status == "placed") 
-			{
-				$orders = Order::where('created_at' ,'>=', $queryRange)
-								->where('status', '=', 'placed')
-							    ->groupBy('date')
-							    ->orderBy('date', 'asc')
-							    ->get(array(
-								'status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
-			}
+			$orders->groupBy('date')->orderBy('date', 'asc');
+			
+			$orders = $orders->get(array('status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')));
 
-			elseif ($status == "verified") 
-			{
-				$orders = Order::where('created_at' ,'>=', $queryRange)
-								->where('status', '=', 'verified')
-							    ->groupBy('date')
-							    ->orderBy('date', 'asc')
-							    ->get(array(
-								'status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
-			}
-
-			elseif ($status == "fufilled") 
-			{
-				$orders = Order::where('created_at' ,'>=', $queryRange)
-								->where('status', '=', 'fufilled')
-							    ->groupBy('date')
-							    ->orderBy('date', 'asc')
-							    ->get(array(
-								'status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
-			}
+			return self::formatOrders($orders, $range);
 
 			//Format db results
 			return self::formatOrders($orders, $range);	
@@ -156,6 +127,18 @@
 							->get(array('status', 'created_at'));
 
 			return self::formatOrderDistribution($orders);
+		}
+
+		public static function queryRestaurantOrderDistribution($id, $range = "month")
+		{
+			$queryRange = self::dateRange($range);
+
+			$orders = Order::where('created_at', '>=', $queryRange)
+							->where('restaurant_id','=', $id)
+							->orderBy('status', 'asc')
+							->get(array('status', 'created_at'));
+
+			return self::formatOrderDistribution($orders);	
 		}
 
 		/**
@@ -175,56 +158,16 @@
 		{
 			$queryRange = self::dateRange($range);
 
-			if($status == "all")
-			{
-				$orders = Order::where('created_at' ,'>=', $queryRange)
-								->where('restaurant_id','=', 1)
-							    ->groupBy('date')
-							    ->orderBy('date', 'asc')
-							    ->get(array(
-								'status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
 
-			}
+			$orders = Order::where('created_at' ,'>=', $queryRange)->where('restaurant_id','=', $id);
 
-			elseif ($status == "placed") 
-			{
-				$orders = Order::where('created_at' ,'>=', $queryRange)
-								->where('restaurant_id','=', 1)
-								->where('status', '=', 'placed')
-							    ->groupBy('date')
-							    ->orderBy('date', 'asc')
-							    ->get(array(
-								'status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
-			}
+			if($status != "all")
+				$orders->where('status','=', $status);
 
-			elseif ($status == "verified") 
-			{
-				$orders = Order::where('created_at' ,'>=', $queryRange)
-								->where('restaurant_id','=', 1)
-								->where('status', '=', 'verified')
-							    ->groupBy('date')
-							    ->orderBy('date', 'asc')
-							    ->get(array(
-								'status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
-			}
+			$orders->groupBy('date')->orderBy('date', 'asc');
+			
+			$orders = $orders->get(array('status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')));
 
-			elseif ($status == "fufilled") 
-			{
-				$orders = Order::where('created_at' ,'>=', $queryRange)
-								->where('restaurant_id','=', 1)
-								->where('status', '=', 'fufilled')
-							    ->groupBy('date')
-							    ->orderBy('date', 'asc')
-							    ->get(array(
-								'status', 'created_at', DB::raw('Date(created_at) as date'), DB::raw('COUNT(*) as "orders"')
-							));
-			}
-
-
-
-			return self::formatOrders($orders, $range);	
+			return self::formatOrders($orders, $range);
 		}
 	}
