@@ -190,6 +190,10 @@ Route::get('how-it-works', 'PagesController@howItWorks');
 Route::get('contact', 'PagesController@contact');
 //Faq
 Route::get('help', 'PagesController@faq');
+//tos
+Route::get('tos', 'PagesController@tos');
+//privacy
+Route::get('privacy', 'PagesController@privacy');
 
 Route::get('logout', function() {
 	

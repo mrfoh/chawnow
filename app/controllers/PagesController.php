@@ -44,4 +44,14 @@
 		{
 			$this->layout->content = View::make($this->viewpath('frontend.pages.faq'), $this->viewdata);
 		}
+
+		public function tos()
+		{
+			$this->layout->content = View::make($this->viewpath('frontend.pages.tos'), $this->viewdata);	
+		}
+
+		public function privacy()
+		{
+			$this->layout->content = View::make($this->viewpath('frontend.pages.privacy'), $this->viewdata);
+		}
 	}

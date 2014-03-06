@@ -1,5 +1,5 @@
 @section('title')
-Contact Us | Chawnow | Online Food Ordering
+Get in touch | Chawnow | Online Food Ordering
 @stop
 
 @section('content')

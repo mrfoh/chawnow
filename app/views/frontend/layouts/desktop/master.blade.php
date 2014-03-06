@@ -75,8 +75,8 @@
 						<ul class="list">
 							<li><a href="/about">About</a></li>
 							<li><a href="/contact">Contact Us</a></li>
-							<li><a href="#">Terms</a></li>
-							<li><a href="#">Privacy Policy</a></li>
+							<li><a href="/tos">Terms</a></li>
+							<li><a href="/privacy">Privacy Policy</a></li>
 						</ul>
 					</div>
 
