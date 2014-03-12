@@ -195,6 +195,33 @@ Route::get('tos', 'PagesController@tos');
 //privacy
 Route::get('privacy', 'PagesController@privacy');
 
+Route::get('test', function() {
+	$no = "07031017543,08037212868,08032608290";
+
+	if($no)
+			{
+				if(strlen($no) == 11)
+				{
+					$number = substr($no, 1, 10);
+					$number = '234'.$number;
+
+					echo $number;
+				}
+				elseif(strlen($no) > 11)
+				{
+					$phones = explode(",", $no);
+					foreach($phones as $key => $value)
+					{
+						$phone_no = substr($value, 1, 10);
+						$phone_no = '234'.$phone_no;
+						$nos[] = $phone_no;
+					}
+
+					echo implode(",", $nos);
+				}
+			}
+});
+
 Route::get('logout', function() {
 	
 	Sentry::logout();

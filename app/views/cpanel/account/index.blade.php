@@ -111,9 +111,9 @@ var cuisines = {{ json_encode($restaurant->cuisines->toArray()) }};
 
 					<div class="control-group">
 						<label class="control-label">Phone</label>
-						<span class="help">Restaurant's contact phone number</span>
+						<span class="help">Restaurant's contact phone numbers (Seperate numbers with comma)</span>
 						<div class="controls">
-							<input class="span6" type="text" name="phone" id="phone" value="{{ ($restaurant) ? $restaurant->phone : '' }}">
+							<input class="span6" type="text" name="phone" id="phone" value="{{ ($restaurant) ? $restaurant->phone : '' }}" placeholder="Eg: 07031017643, 08059128765">
 						</div>
 					</div>					
 

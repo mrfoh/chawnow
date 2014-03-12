@@ -14,10 +14,23 @@
 			{
 				if(strlen($no) == 11)
 				{
-					$number = substr($no, 1, 10);
+					$number = substr($no, 1, 20);
 					$number = '234'.$number;
 
 					return $number;
+				}
+
+				elseif(strlen($no) > 11)
+				{
+					$phones = explode(",", $no);
+					foreach($phones as $key => $value)
+					{
+						$number = substr($value, 1, 20);
+						$number = '234'.$pho;
+						$nos[] = $number;
+					}
+
+					return implode(",", $nos);
 				}
 			}
 		}
@@ -40,7 +53,7 @@
 			$data['order'] = $order;
 
 			//Send mail
-			Mail::later(10,'emails.orders.placed', $data, function($message) use ($order) {
+			Mail::later(20,'emails.orders.placed', $data, function($message) use ($order) {
 
 				$message->to($order->customer_email, $order->customer_name)
 						->subject('Order Verification');
@@ -63,7 +76,7 @@
 			//Notify restaurant via email
 			$data['order'] = $order;
 
-			Mail::later(10, 'emails.orders.verified', $data, function($message) use ($order) {
+			Mail::later(20, 'emails.orders.verified', $data, function($message) use ($order) {
 
 				$message->to($order->restaurant->email, $order->restaurant->name)
 						->subject('New order #'.$order->id);
@@ -94,7 +107,7 @@
 			//Notify customer via email
 			$data['order'] = $order;
 
-			Mail::later(10,'emails.orders.confirm', $data, function($message) use ($order) {
+			Mail::later(20,'emails.orders.confirm', $data, function($message) use ($order) {
 
 				$message->to($order->customer_email, $order->customer_name)
 						->subject('Order Confirmation');
