@@ -9,8 +9,11 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 			'click .toogle-menu-form': "toggleMenuForm",
 			'click .toggle-item-form': "toggleItemForm",
 			'click .new-trigger': "toggleNewForm",
+			'click .new-group-form-toggle': "toggleGroupForm",
 			'click #save-category-btn':"saveCategory",
+			'click #save-group-btn': "saveGroup",
 			'change #item-menu': "onItemMenuChange",
+			'change #item-category': "onItemCategoryChange",
 			'click #save-menu-btn': "addMenu",
 			'click #save-item-btn': "addItem"
 		},
@@ -23,6 +26,7 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 			'itemprice': '#item-price',
 			'itemmenu': "#item-menu",
 			'itemcategory': '#item-category',
+			'itemgroup': '#item-group',
 			'itemstatus': "#item-status"
 		},
 
@@ -40,6 +44,7 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 
 			$("#menu-item-modal").on('show', function() {
 				var menus = new Array();
+
 				self.menus.each(function(menu) {
 					var obj = { id: menu.id, text: menu.get('name') };
 					menus.push(obj);
@@ -53,6 +58,11 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 				self.ui.itemcategory.select2({
 					placeholder: "Select a category",
 					data: function() { return {results: {}} }
+				});
+
+				self.ui.itemgroup.select2({
+					placeholder: "Select a group",
+					data: function() { return { results: {} } }
 				});
 			});
 
@@ -149,6 +159,18 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 			this.ui.itemcategory.select2({data: items});
 		},
 
+		populateGroups: function (groups) {
+			var items = new Array();
+			console.log(groups);
+
+			_.each(groups, function(group) {
+				var obj = { id: group.id, text: group.name};
+				items.push(obj);
+			});
+
+			this.ui.itemgroup.select2({data: items});
+		},
+
 		/** UI Event Methods **/ 
 		toggleMenuForm: function() {
 			this.ui.menuForm.slideToggle();
@@ -165,6 +187,15 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 
 			form.slideToggle();
 
+			event.preventDefault();
+		},
+
+		toggleGroupForm: function (event) {
+
+			var el = $(event.currentTarget);
+			var form = el.next()
+
+			form.slideToggle();
 			event.preventDefault();
 		},
 
@@ -210,6 +241,54 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 			})
 		},
 
+		saveGroup: function (event) {
+			var el = $(event.currentTarget),
+				self = this;
+
+				el.prop('disbabled', true);
+				el.html('Saving...');
+
+			if(!this.ui.itemcategory.val())
+				alert("Please select a category");
+
+			var data = { name: $('#new-group-name').val(), menu: this.ui.itemmenu.val(), category: this.ui.itemcategory.val() };
+			var url = Cpanel.Constants.url+"/menus/group";
+
+			$.ajax({
+				url: url,
+				type:'POST',
+				data: data,
+				dataType: 'json',
+				success: function (response, status, xhr) {
+					if(response.status == "success") {
+						//category name field
+						$('#new-group-name').val('');
+						//enable button
+						el.prop('disbabled', false);
+						//revert to original button text
+						el.html('Save group');
+						//hide form
+						$('.new-group-form').slideUp();
+						//find category
+						var model = response.model;
+						var id = model.menu_category_id;
+						var menu = self.menus.get(data.menu);
+						var categories = menu.get('categories');
+						var thiscategory;
+						
+						_.each(categories, function(category) {
+							if(category.id == id) {
+								category.groups.push(model);
+								thiscategory = category;
+							}
+						});
+
+						self.populateGroups(thiscategory.groups);
+					}
+				}
+			})
+		},
+
 		onItemMenuChange: function (event) {
 
 			var el = $(event.currentTarget);
@@ -219,6 +298,26 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 				categories = menu.get('categories');
 
 			this.populateCategories(categories);
+		},
+
+		onItemCategoryChange: function (event) {
+
+			var el = $(event.currentTarget);
+				id = el.val(),
+				menuid = this.ui.itemmenu.val();
+
+
+			var menu = this.menus.get(menuid);
+			var categories = menu.get('categories');
+			var thiscategory;
+
+			_.each(categories, function(category) {
+				if(category.id == id) {
+					thiscategory = category;
+				}
+			});
+
+			this.populateGroups(thiscategory.groups);
 		},
 
 		addMenu: function (event) {
@@ -268,6 +367,7 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 				"price": this.ui.itemprice.val(),
 				"menu_id": this.ui.itemmenu.val(),
 				"menu_category_id": this.ui.itemcategory.val(),
+				"item_group_id": this.ui.itemgroup.val(),
 				"active": this.ui.itemstatus.val()
 			};
 

@@ -9,4 +9,9 @@
 		{
 			return $this->hasMany('Item','menu_category_id');
 		}
+
+		public function groups()
+		{
+			return $this->hasMany('ItemGroup', 'menu_category_id');
+		}
 	}

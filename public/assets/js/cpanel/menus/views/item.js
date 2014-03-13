@@ -55,9 +55,15 @@ define(function() {
 
 				var menu = this.model.get('menu');
 				var category = this.model.get('category');
+				var group = this.model.get('group');
 				var catid = (category === null) ? 0 : category.id;
+				var groupid = (group === null) ? 0: group.id;
+				var groups;
 
 				var categories = this.parent.menus.get(menu.id).get('categories');
+				_.each(categories, function(category) { if(category.id == catid) groups = category.groups; });
+
+				console.log(groups);
 
 				this.parent.ui.itemmenu.val(menu.id);
 				this.parent.ui.itemmenu.select2('val', menu.id);
@@ -66,7 +72,12 @@ define(function() {
 				this.parent.populateCategories(categories);
 					
 				this.parent.ui.itemcategory.select2('val', catid);
-				
+
+				this.parent.ui.itemgroup.val(groupid);
+				this.parent.populateGroups(groups);
+
+				this.parent.ui.itemgroup.select2('val', groupid);
+
 
 			event.preventDefault();
 		},

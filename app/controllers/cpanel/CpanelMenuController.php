@@ -68,6 +68,22 @@
 			}
 		}
 
+		public function addGroup()
+		{
+			$name = Input::get('name');
+			$category =Input::get('category');
+
+			$group = new ItemGroup;
+
+			$group->name = $name;
+			$group->menu_category_id = $category;
+
+			if($group->save())
+			{
+				return Response::json( array('status' =>"success", "model" => $group->toArray()) );
+			}
+		}
+
 		public function addItem()
 		{
 			//get item data
@@ -76,6 +92,7 @@
 			$params['price'] = Input::get('price');
 			$params['menu_id'] = Input::get('menu_id');
 			$params['menu_category_id'] = Input::get('menu_category_id', NULL); 
+			$params['item_group_id'] = Input::get('item_group_id', NULL);
 			$params['active'] = Input::get('active');
 
 			//create item
@@ -92,6 +109,7 @@
 			$params['price'] = Input::get('price');
 			$params['menu_id'] = Input::get('menu_id');
 			$params['menu_category_id'] = Input::get('menu_category_id', NULL); 
+			$params['item_group_id'] = Input::get('item_group_id', NULL);
 			$params['active'] = Input::get('active');
 
 			//create item

@@ -1,104 +1,12 @@
-Chawnow.Views.MenuView = Backbone.View.extend({
-	tagName: 'li',
-
-	initialize: function(options) {
-		this.template = options.template;
-		this.parent = options.parent;
-	},
-
-	events: {
-		'click a.menu':"onMenuClick",
-		'click a.menu-category': "onMenuCategoryClick"
-	},
-
-	render: function() {
-		this.$el.html( this.template( this.model.toJSON() ) );
-		return this;
-	},
-
-	onMenuClick: function (event) {
-		var el = $(event.currentTarget),
-			ul = el.parent('li').parent('ul');
-
-		ul.find('li.active').removeClass('active');	
-		el.parent('li').addClass('active');
-
-		ul.find('ul.collapse.in').each(function() { $(this).removeClass('in') });
-
-		this.parent.renderMenuItems(this.model);
-		event.preventDefault();
-	},
-
-	onMenuCategoryClick: function (event) {
-		var el = $(event.currentTarget),
-			ul = el.parent('li').parent('ul');
-			category = el.attr('data-category'),
-			menu = ul.attr('data-menu-id');
-
-		ul.find('li.active').removeClass('active');	
-		el.parent('li').addClass('active');
-
-		this.parent.renderMenuCategoryItems(category, menu);
-		event.preventDefault();
-	}
-});
-
-Chawnow.Views.ItemView = Backbone.View.extend({
-	tagName: 'li',
-
-	initialize: function(options) {
-		this.template = options.template;
-		this.parent = options.parent;
-	},
-
-	events: {
-		'click .add-to-cart': 'onAddToCartClick'
-	},
-
-	render: function() {
-		this.$el.html( this.template( this.model.toJSON() ) );
-		return this;
-	},
-
-	onAddToCartClick: function (event) {
-		var el = $(event.currentTarget),
-			itemid = el.attr('data-id'),
-			itemname = el.attr('data-item-name'),
-			itemprice = el.attr('data-item-price');
-			url = Chawnow.Constants.url+"/cart/add",
-			data = { id : itemid, name: itemname, price: itemprice , restaurant: Chawnow.data.restaurant.uid },
-			self = this;
-
-		this.parent.ui.cartcontent.slideUp();
-		this.parent.ui.cart.find('.loading-indicator').slideDown();
-
-		$.ajax({
-			url: url,
-			type: 'POST',
-			data: data,
-			dataType: 'json',
-			success: function(response, status, xhr) {
-				self.parent.ui.cart.find('.loading-indicator').slideUp();
-				self.requestSuccess(response, status, xhr, self);
-			}
-		})
-		event.preventDefault();
-	},
-
-	requestSuccess: function (response, status, xhr, view) {
-		if(response.status == "success") {
-			view.parent.renderCartContents(response.contents, response.total);
-		}
-	}
-});
-
 Chawnow.Views.RestaurantPage = Backbone.View.extend({
 	el: ".restaurant-page",
 
 	events: {
 		'click .reduce-qty': 'onReduceQtyClick',
 		'click .increase-qty': 'onIncreaseQtyClick',
-		'click .checkout-btn': 'onCheckoutBtnClick'
+		'click .checkout-btn': 'onCheckoutBtnClick',
+		'click a.menu-category': "onMenuCategoryClick",
+		'click .add-to-cart': 'onAddToCartClick'
 	},
 
 	setUpUi: function() {
@@ -113,16 +21,8 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 	initialize: function() {
 		//set up ui
 		this.setUpUi();
-		//create collections
-		this.menucollection = new Backbone.Collection;
-		this.menucollection.comparator = "id";
-		this.menuitemcolllection = new Backbone.Collection;
-		//bind to collection events
-		this.menucollection.on('reset', this.renderMenus, this);
-		this.menuitemcolllection.on('reset', this.renderDefaultMenu, this);
-		//reset collections
-		this.menucollection.reset(Chawnow.data.menus);
-		this.menuitemcolllection.reset(Chawnow.data.items);
+		//render a default menu
+		this.renderDefaultMenu();
 	},
 
 	ui: {
@@ -133,74 +33,15 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 		'checkoutbtn': '.checkout-btn'
 	},
 
-	/** Collection Methods **/
-	renderMenus: function() {
-		this.ui.menulist.html('');
-		this.menucollection.each(this.renderMenu, this);
-	},
-
-	renderMenu: function( menu ) {
-		var template = _.template($('#menu-tmpl').html());
-		var view = new Chawnow.Views.MenuView({model: menu, template: template, parent: this});
-			//render menu
-			this.ui.menulist.prepend( view.render().el );
-	},
-
 	renderDefaultMenu: function() {
-		var listitem = this.ui.menulist.find('li:first a'),
-			id = listitem.attr('data-id'),
-			menu = this.menucollection.get(id),
-			items = this.menuitemcolllection.where({menu_name: menu.get('name')});
 
-		$('.menu-title').text(menu.get('name')).show();
-		var ul = listitem.parent('li').find('ul').addClass('in');
+		var menus = this.ui.menulist;
+		var menu = menus.find('li:first a');
+		var target = $(menu.attr('data-menu'));
 
-		this.ui.itemlist.html('');
-		
-		_.each(items, this.renderMenuItem, this);
+		target.addClass('active');
 	},
 
-	renderMenuItems: function(menu) {
-		var items = this.menuitemcolllection.where({menu_name: menu.get('name')});
-		//clear items
-		this.ui.itemlist.html('');
-		//hide menu title
-		$('.menu-title').hide();
-		$('.menu-title').text(menu.get('name')).show();
-
-		_.each(items, this.renderMenuItem, this);
-	},
-
-	renderMenuItem: function (item) {
-		var template = _.template($('#item-tmpl').html());
-		var view = new Chawnow.Views.ItemView({model: item, template: template, parent: this});
-		//render menu
-		this.ui.itemlist.prepend( view.render().el );
-	},
-
-	renderMenuCategoryItems: function (categoryname, menu_id) {
-		var items = new Array();
-		var menu = this.menucollection.get(menu_id);
-		var cname;
-
-		_.each(this.menuitemcolllection.models, function(model) {
-			var category = model.get('category');
-			if(category != null) {
-				console.log(category)
-				if(category.name == categoryname) {
-					items.push(model);
-					cname = category.name;
-				}
-			}
-		});
-
-		this.ui.itemlist.html('');
-		//hide menu title
-		$('.menu-title').hide();
-		$('.menu-title').text(menu.get('name')+" - "+cname).show();
-
-		_.each(items, this.renderMenuItem, this);
-	},
 
 	renderCartContents: function (contents, total) {
 
@@ -318,6 +159,48 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 	onCheckoutBtnClick: function (event) {
 		var url = Chawnow.Constants.url+"/checkout/"+Chawnow.data.restaurant.uid;
 		window.location = url;
+	},
+
+	onMenuCategoryClick: function (event) {
+		event.preventDefault();
+		var el = $(event.currentTarget);
+  		$(el).tab('show');
+
+  		var ul = el.parent('li').parent('ul').parent('li').parent('ul');
+
+		ul.find('li.active').removeClass('active');	
+		el.parent('li').addClass('active');
+	},
+
+	onAddToCartClick: function (event) {
+		var el = $(event.currentTarget),
+			itemid = el.attr('data-id'),
+			itemname = el.attr('data-item-name'),
+			itemprice = el.attr('data-item-price');
+			url = Chawnow.Constants.url+"/cart/add",
+			data = { id : itemid, name: itemname, price: itemprice , restaurant: Chawnow.data.restaurant.uid },
+			self = this;
+
+		this.ui.cartcontent.slideUp();
+		this.ui.cart.find('.loading-indicator').slideDown();
+
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: data,
+			dataType: 'json',
+			success: function(response, status, xhr) {
+				self.ui.cart.find('.loading-indicator').slideUp();
+				self.requestSuccess(response, status, xhr, self);
+			}
+		})
+		event.preventDefault();
+	},
+
+	requestSuccess: function (response, status, xhr, view) {
+		if(response.status == "success") {
+			view.renderCartContents(response.contents, response.total);
+		}
 	}
 });
 

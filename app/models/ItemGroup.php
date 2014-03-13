@@ -1,7 +1,7 @@
 <?php
 	class ItemGroup extends Eloquent
 	{
-		protected $fillable = array("name");
+		protected $fillable = array("menu_category_id", "name");
 
 		public function items()
 		{

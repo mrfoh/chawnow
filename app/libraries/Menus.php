@@ -51,6 +51,7 @@
 			$data['price'] = $item->price;
 			$data['active'] = (bool) $item->active;
 			$data['category'] = ($item->category) ? $item->category->toArray() : NULL;
+			$data['group'] = ($item->group) ? $item->group->toArray() : NULL;
 			$data['menu'] = $item->menu->toArray();
 			$data['created_at'] = date('c', strtotime($item->created_at));
 
@@ -70,11 +71,12 @@
 		public static function all($id, $active = "yes")
 		{
 			$restaurantmenus = array();
+			$relationships = array("items","categories","categories.items","categories.groups","categories.groups.items");
 
 			//Active menus
 			if($active == "yes")
 			{
-				$menus = Menu::with(array('items','categories','categories.items'))
+				$menus = Menu::with($relationships)
 							  ->where('restaurant_id','=',$id)
 							  ->where('active','=',1)
 							  ->orderBy('created_at','desc')
@@ -83,7 +85,7 @@
 			//Inactive menus
 			elseif($active == "no")
 			{
-				$menus = Menu::with(array('items','categories','categories.items'))
+				$menus = Menu::with($relationships)
 							  ->where('restaurant_id','=',$id)
 							  ->where('active','=',0)
 							  ->orderBy('created_at','desc')
@@ -92,7 +94,7 @@
 			//All menus
 			elseif ($active == "all")
 			{
-				$menus = Menu::with(array('items','categories','categories.items'))
+				$menus = Menu::with($relationships)
 							  ->where('restaurant_id','=',$id)
 							  ->orderBy('created_at','desc')
 							  ->get();	

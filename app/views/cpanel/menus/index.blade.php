@@ -42,10 +42,15 @@
 		<ul>
 			<li><i class="icon-money"></i> N<%= price %></li>
 			<% if(category != null) { %>
-			<li><i class="icon-reorder"></i> <%= category.name %></li>
+				<li><i class="icon-reorder"></i> <%= category.name %></li>
 			<% } else { %>
-			<li><i class="icon-reorder"></i> Uncategorized</li>
+				<li><i class="icon-reorder"></i> Uncategorized</li>
 			<% } %>
+			<% if(group != null) { %>
+				<li><i class="icon-inbox"></i> <%= group.name %></li>
+			<% } else { %>
+				<li><i class="icon-inbox"></i> Ungrouped</li>
+			<%	} %>
 			<li><i class="icon-paste"></i> <%= menu.name %></li>
 		</ul>
 	</div>
@@ -130,10 +135,10 @@
 			</div>
 			<div class="row-fluid">
 				<div class="span6">
-					<input type="hidden" id="item-menu" class="span12"></select>
+					<input type="hidden" id="item-menu" class="span12">
 				</div>
 				<div class="span6">
-					<input type="hidden" id="item-category" class="span12"></select>
+					<input type="hidden" id="item-category" class="span12">
 					<a href="" class="new-trigger">+ New Category</a>
 					<div class="new-form" style="display: none;">
 						<input type="text" id="new-category-name" placeholder="Category Name" class="span12">
@@ -141,10 +146,20 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="row-fluid">
 				<div class="span6">
-					<p>Status</p>
-					<select id="item-status">
+					<input type="hidden" id="item-group" class="span12">
+					<a href="" class="new-group-form-toggle">+ New Group</a>
+					<div class="new-group-form" style="display: none;">
+						<input type="text" id="new-group-name" placeholder="Group name" class="span12">
+						<button class="btn btn-block btn-info" type="button" style="margin-bottom: 10px;" id="save-group-btn">Save Group</button>
+					</div>
+				</div>
+
+				<div class="span6">
+					<select id="item-status" class="span12">
+						<option>Select a status</option>
 						<option value="1">Active</option>
 						<option value="0">Inactive</option>
 					</select>

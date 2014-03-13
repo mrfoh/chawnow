@@ -18,16 +18,18 @@ Chawnow.data = {
 	items: {{ json_encode($items) }}
 }
 </script>
+
 <script type="text/template" id="menu-tmpl">
 <a class="menu" data-id="<%= id %>" data-toggle="collapse" data-parent="#menus-list" href="#<%= slug %>-categories"><%= name %></a>
 <% if(categories) { %>
 	<ul class="categories collapse" id="<%= slug %>-categories" data-menu-id="<%=id %>">
 	<% _.each(categories, function(category) { %>
-		<li><a class="menu-category" href="" data-category="<%= category.name %>"><%= category.name %></a></li>
+		<li><a class="menu-category" href="" data-category="<%= category.name %>" data-category-id="<%= category.id %>"><%= category.name %></a></li>
 	<% }); %>
 	</ul>
 <% } %>
 </script>
+
 <script type="text/template" id="item-tmpl">
 <div class="menu-item clearfix" data-menu-id="<%=menu.id %>" <% if(category) { %> data-category="<%= category.name %>" <% } %>>
 	<div class="item-name pull-left"><%= name %></div>
@@ -37,6 +39,7 @@ Chawnow.data = {
 	</div>
 </div>
 </script>
+
 <script type="text/template" id="cart-item-tmpl">
 <li data-rowid="<%= rowid %>" class="clearfix">
 	<div class="pull-left">
@@ -131,11 +134,30 @@ Chawnow.data = {
 			<div class="restaurant-menu clearfix">
 				<div class="menus pull-left">
 					<h3>Menus</h3>
-					<ul class="menu-list" id="menus-list"></ul>
+					<ul class="menu-list" id="menus-list">
+					@foreach($menus as $menu)
+						<li>
+						@if($menu['categories'])
+							<a href="#{{ $menu['slug'] }}-categories" class="menu" data-toggle="collapse" data-parent="#menus-list" data-menu="#{{ $menu['slug'] }}">
+								{{ $menu['name'] }}
+							</a>
+							<ul class="categories collapse" id="{{ $menu['slug'] }}-categories" >
+							@foreach($menu['categories'] as $category)
+								<li><a class="menu-category" href="#" data-target="#{{$menu['slug'] }}" data-toggle="tab" data-category-id="{{ $category['id'] }}">{{ $category['name'] }}</a></li>
+							@endforeach
+							</ul>
+						@else
+							<a href="#{{$menu['slug'] }}" class="menu" data-toggle="tab" data-menu="#{{ $menu['slug'] }}">{{ $menu['name'] }}</a>
+						@endif
+						</li>
+					@endforeach
+					</ul>
 				</div>
 				<div class="items pull-left">
 					<h3 class="menu-title" style="display:none;"></h3>
-					<ul class="item-list"></ul>
+					<ul class="item-list tab-content">
+					@include('frontend.restaurant.desktop.menu')
+					</ul>
 				</div>
 			</div>
 		</div>
