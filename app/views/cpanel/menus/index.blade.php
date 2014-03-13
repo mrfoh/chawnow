@@ -110,7 +110,7 @@
 			</div>
 
 			<div class="grid-body">
-				<ul class="item-list scroller" data-height="430px" data-always-visible="0"></ul>
+				<ul class="item-list scroller" data-height="500px" data-always-visible="0"></ul>
 				<div class="menu-items-empty" style="display:none;">
 					<h3>No items have been created</h3>
 				</div>

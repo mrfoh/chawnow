@@ -163,13 +163,20 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 
 	onMenuCategoryClick: function (event) {
 		event.preventDefault();
+
 		var el = $(event.currentTarget);
   		$(el).tab('show');
-
   		var ul = el.parent('li').parent('ul').parent('li').parent('ul');
-
+  		var menutab = el.attr('data-target');
+  		var category = el.attr('data-category-id');
+  		//Highlight active category
 		ul.find('li.active').removeClass('active');	
 		el.parent('li').addClass('active');
+		//hide other categories
+		$(menutab).find('.menu-category').hide();
+		//show active category
+		$(menutab).find('.menu-category[data-id="'+category+'"]').show();
+
 	},
 
 	onAddToCartClick: function (event) {

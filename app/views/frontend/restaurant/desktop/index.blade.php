@@ -201,7 +201,7 @@ Chawnow.data = {
 				@endif
 				<div class="cart-actions">
 					@if($status)
-						@if($cart_total >= $restaurant->meta->minimium)
+						@if($cart_total >= $restaurant->meta->minimium || empty($cart_contents))
 						<button type="button" class="btn btn-success btn-block checkout-btn">Checkout Order</button>
 						@else
 						<button type="button" class="btn btn-info btn-block checkout-btn" disabled="disbabled">Checkout Order</button>
