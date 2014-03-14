@@ -19,27 +19,6 @@ Chawnow.data = {
 }
 </script>
 
-<script type="text/template" id="menu-tmpl">
-<a class="menu" data-id="<%= id %>" data-toggle="collapse" data-parent="#menus-list" href="#<%= slug %>-categories"><%= name %></a>
-<% if(categories) { %>
-	<ul class="categories collapse" id="<%= slug %>-categories" data-menu-id="<%=id %>">
-	<% _.each(categories, function(category) { %>
-		<li><a class="menu-category" href="" data-category="<%= category.name %>" data-category-id="<%= category.id %>"><%= category.name %></a></li>
-	<% }); %>
-	</ul>
-<% } %>
-</script>
-
-<script type="text/template" id="item-tmpl">
-<div class="menu-item clearfix" data-menu-id="<%=menu.id %>" <% if(category) { %> data-category="<%= category.name %>" <% } %>>
-	<div class="item-name pull-left"><%= name %></div>
-	<div class="item-price pull-right">
-		<span><b class="naira">N</b><%= price %></span>
-		<button title="Click to add this to your order" class="btn btn-sm btn-warning add-to-cart" data-id="<%= id %>" data-item-name="<%= name %>" data-item-price="<%= price %>"><i class="icon-plus-sign icon-large"></i></button>
-	</div>
-</div>
-</script>
-
 <script type="text/template" id="cart-item-tmpl">
 <li data-rowid="<%= rowid %>" class="clearfix">
 	<div class="pull-left">
@@ -76,7 +55,13 @@ Chawnow.data = {
 				</div> -->
 			</div>
 			<div class="restaurant-header clearfix">
-				<div class="restaurant-logo pull-left">{{ HTML::image($restaurant->logo) }}</div>
+				<div class="restaurant-logo pull-left">
+					@if($restaurant->logo)
+					{{ HTML::image($restaurant->logo) }}
+					@else
+					{{ HTML::image('assets/img/restaurant-logo-default.png') }}
+					@endif
+				</div>
 				<div class="restaurant-info pull-left">
 					<ul class="info-nav clearfix">
 						<li class="active"><a href="#about" data-toggle="tab">About Us</a></li>

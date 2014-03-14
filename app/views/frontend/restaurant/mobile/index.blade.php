@@ -85,6 +85,19 @@ $(document).bind('pageinit', function() {
 					@if($menu['categories'])
 						@foreach($menu['categories'] as $category)
 						<li class="category-name ui-shadow">{{ $category['name'] }}</li>
+							@if($category['groups'])
+							<ul class="menu-items">
+							@foreach($category['groups'] as $group)
+							<li class="group-name ui-shadow">{{ $group['name'] }}</li>
+								@foreach($group['items'] as $item)
+								<li class="clearfix item ui-shadow" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
+									<div class="item-name pull-left">{{ $item['name'] }}</div>
+									<div class="item-price pull-right" style="font-size: .8em"><b class="naira">N</b>{{ number_format($item['price'], 2) }}</div>
+								</li>
+								@endforeach
+							@endforeach
+							</ul>
+							@else
 							<ul class="menu-items">
 							@foreach($category['items'] as $item)
 							<li class="clearfix item ui-shadow" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
@@ -93,6 +106,7 @@ $(document).bind('pageinit', function() {
 							</li>
 							@endforeach
 							</ul>
+							@endif
 						@endforeach
 					@else
 						<ul class="menu-items">
@@ -142,7 +156,7 @@ $(document).bind('pageinit', function() {
 			@endif
 				<div class="cart-actions" style="padding: .5em;">
 					@if($status)
-						@if($cart_total >= $restaurant->meta->minimium)
+						@if($cart_total >= $restaurant->meta->minimium && !empty($cart_contents))
 						<button type="button" class="ui-btn btn-success checkout-btn">Checkout Order</button>
 						@else
 						<button type="button" class="ui-btn btn-info checkout-btn" disabled="disbabled">Checkout Order</button>
