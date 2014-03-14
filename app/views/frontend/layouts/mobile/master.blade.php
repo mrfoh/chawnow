@@ -30,7 +30,7 @@
 				   <li><a href="/logout" data-ajax="false">Logout</a></li>
 				   @endif
 				   <li><a href="/contact" data-ajax="false">Contact Us</a></li>
-				   <li><a href="#" data-ajax="false">Faqs</a></li>
+				   <li><a href="/help" data-ajax="false">Faqs</a></li>
 			   </ul>
 			</div><!-- /panel -->
 
@@ -45,6 +45,8 @@
 		<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="{{ URL::to("assets/js/libs/jquery.js") }}">\x3C/script>')</script>
+
+		@if(App::environment('production'))
 		<!-- Google Analytics -->
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -56,6 +58,8 @@
 		  ga('send', 'pageview');
 
 		</script>
+		@endif
+
 		<!-- Load jQuery mobile -->
 		{{ HTML::script('assets/js/libs/jquery.mobile-1.4.0.min.js') }}
 		<!-- Load Backbone -->

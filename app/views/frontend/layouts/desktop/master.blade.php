@@ -100,6 +100,8 @@
 		<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="{{ URL::to("assets/js/libs/jquery.js") }}">\x3C/script>')</script>
+		
+		@if(App::environment('production'))
 		<!-- Google Analytics -->
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -109,6 +111,9 @@
 
 		  ga('create', 'UA-48404399-1', 'chawnow.com');
 		  ga('send', 'pageview');
+
+		</script>
+		@endif
 
 		</script>
 		{{ HTML::script('assets/js/bootstrap.min.js') }}
