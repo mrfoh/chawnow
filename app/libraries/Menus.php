@@ -83,8 +83,8 @@
 				"categories.items.options.values",
 				"categories.groups",
 				"categories.groups.items",
-				"categories.groups.item.options",
-				"categories.groups.item.options.values");
+				"categories.groups.items.options",
+				"categories.groups.items.options.values");
 
 			//Active menus
 			if($active == "yes")
