@@ -224,7 +224,7 @@
 
 					foreach($decoded->values as $valueobj)
 					{
-						$itemOptionValue = new itemOptionValue;
+						$itemOptionValue = new ItemOptionValue;
 
 						$itemOptionValue->option_id = $itemOption->id;
 						$itemOptionValue->value = $valueobj->value;
