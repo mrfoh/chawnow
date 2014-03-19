@@ -21,11 +21,15 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 	Route::post('menus/group', 'CpanelMenuController@addGroup');
 
 	//Menu Items
-	Route::post('menus/items', 'CpanelMenuController@addItem');
-	Route::put('menus/items/{id}', 'CpanelMenuController@updateItem');
-	Route::delete('menus/items/{id}', 'CpanelMenuController@removeItem');
-	Route::get('menus/items/activate/{id}', 'CpanelMenuController@activateItem');
-	Route::get('menus/items/deactivate/{id}', 'CpanelMenuController@deactivateItem');
+	Route::get('menus/items/{id}/delete', 'CpanelMenuController@removeItem');
+	Route::get('menus/item/add', 'CpanelMenuController@itemForm');
+	Route::get('menus/item/{id}', 'CpanelMenuController@itemForm');
+
+	Route::post('menus/item/add', 'CpanelMenuController@addItem');
+	Route::post('menus/item/{id}', 'CpanelMenuController@updateItem');
+
+	Route::get('menus/item/activate/{id}', 'CpanelMenuController@activateItem');
+	Route::get('menus/item/deactivate/{id}', 'CpanelMenuController@deactivateItem');
 
 	//Orders
 	Route::get('orders/{status}', 'CpanelOrdersController@index');
@@ -68,6 +72,14 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 
 	//upload controller
 	Route::any('upload','UploadController@index');
+
+	Route::get('test', function() {
+		$orders = Orders::restaurant(3, "all");
+
+		echo "<pre>";
+		print_r($orders);
+		echo "</pre>";
+	});
 
 	Route::get('/', array('before' => 'cpanel_auth', 'uses' => 'CpanelHomeController@dashboard') );
 });
@@ -197,12 +209,7 @@ Route::get('tos', 'PagesController@tos');
 Route::get('privacy', 'PagesController@privacy');
 
 Route::get('test', function() {
-	$menus = Menus::all(3);
-	foreach ($menus as $menu) {
-		echo "<pre>";
-		print_r($menu['categories']);
-		echo "</pre>";
-	}
+	
 });
 
 Route::get('logout', function() {

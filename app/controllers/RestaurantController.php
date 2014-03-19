@@ -39,7 +39,7 @@
 				$this->viewdata['restaurant'] = $restaurant;
 				$this->viewdata['schedules'] = RestaurantSchedule::where('restaurant_id','=',$restaurant->id)->get();
 				$this->viewdata['menus'] = Menus::all($restaurant->id);
-				$this->viewdata['items'] = Menus::allItems($restaurant->id, "yes");
+				$this->viewdata['items'] = Menus::allItems($restaurant->id);
 				$this->viewdata['status'] = Restaurants::status($restaurant->id);
 				$this->viewdata['cart_contents'] = $contents;
 				$this->viewdata['cart_total'] = $carttotal;

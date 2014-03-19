@@ -76,57 +76,30 @@
 		padding: 0;
 		list-style: none;
 
-		li
+		.item
 		{
 			display: inline-block;
-			width: 31%;
-			margin-right: 1%;
-			.menu-item
+			float: left;
+			width: 46%;
+			margin-right: 2%;
+			margin-bottom: 2%;
+			position: relative;
+			background: #FFF;
+			border: 1px solid #ccc;
+			.box-sizing(border-box);
+			padding: 5px 10px;
+			.border-radius(5px);
+
+			.description, .name { margin-bottom: 10px; }
+
+			.meta
 			{
-				display: block;
-				width: 100%;
-				-webkit-box-shadow: 0px 1px 5px rgba(50, 50, 50, 0.75);
-				-moz-box-shadow:    0px 1px 5px rgba(50, 50, 50, 0.75);
-				box-shadow:         0px 1px 5px rgba(50, 50, 50, 0.75);
-				.item-name
-				{
-					position: relative;
-					width: 100%;
-					background: #FFF;
-					text-overflow: ellipsis;
-					h4 {
-						padding: 10px 10px;
-						text-align: left;
-						white-space: nowrap;
-						text-overflow: ellipsis;
-						overflow: hidden;
-					}
-					.remove-item {
-						position: absolute;
-						top: 10px;
-						right: 10px;
-					}
-					.edit-item {
-						position: absolute;
-						top: 25px;
-						right: 10px;
-					}
-				}
-				.item-details
-				{
-					background: #C7C2C2;
-					ul {
-						margin: 0;
-						padding: 0;
-						li {
-							display: block !important;
-							width: 100% !important;
-							color: #333;
-							padding: 5px 10px;
-							font-size: 1em;
-						}
-					}
-				}
+			 	margin: 0;
+			 	list-style: none;
+			 	background:#F5F5F5;
+			 	padding: 10px 0;
+
+			 	li { padding: 5px 10px;}	
 			}
 		}
 	}
@@ -138,6 +111,63 @@
 		left: 50%;
 		text-align: center;
 		h3 { font-size: 2.5em; }
+	}
+}
+
+#menu-item-form-app
+{
+	.toggled-form, .option-form, .option-value-form { display: none; }
+	.option-form { padding-bottom: 10px; }
+
+	.option-list
+	{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li
+		{
+			position: relative;
+			background: #eee;
+			margin-bottom: 5px;
+			
+			.option-name {
+				padding: 10px 20px;
+				font-weight: bold;
+			}
+			.actions 
+			{
+				position: absolute;
+				top: 5px;
+				right: 20px;
+
+				a { 
+					display: inline-block;
+					text-decoration: none;
+					padding: 5px;
+				}
+			}
+
+			.option-value-list
+			{
+				margin: 0;
+				color: #333;
+
+				li {
+					display: inline-block;
+					float: left;
+					width: 48%;
+					margin-right: 2%;
+					margin-bottom: 1%;
+					list-style: none;
+					background: #FFF;
+					padding: 10px 0px;
+					.border-radius(10px);
+
+					.value-name { padding: 0 10px; }
+				}
+			}
+		}
 	}
 }
 

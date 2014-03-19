@@ -70,6 +70,7 @@
 	
 	<script type="text/javascript">
 		window.Cpanel = window.Cpanel || {};
+		Cpanel.Views = Cpanel.Views || {};
 		Cpanel.Constants = {
 			url : "http://{{ Config::get('app.cpanel_url') }}"
 		}

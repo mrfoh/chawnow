@@ -85,7 +85,14 @@
 			//Notify restaurant via sms	
 			foreach($order->items as $oitems)
 			{
-				$orderitems[] = $oitems->item->name."x".$oitems->qty;
+				if($oitems->options) {
+					foreach(unserialize($oitems->options) as $key => $option) {
+						$optionString = $key." = ".$option;
+						$options[] = $optionString;
+					}
+				}
+
+				$orderitems[] = $oitems->item->name."x".$oitems->qty."(".implode(",", $options).")";
 			}
 
 			$message = "New order. Order Type:".ucwords($order->type).",Customer Name:".$order->customer_name.",Customer Address:".$order->customer_address.",Customer Phone:".$order->customer_phone.". Customer Order: ".implode(",", $orderitems);

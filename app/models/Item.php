@@ -22,4 +22,9 @@
 		{
 			return $this->belongsTo('Menu');
 		}
+
+		public function options()
+		{
+			return $this->hasMany('ItemOption');
+		}
 	}

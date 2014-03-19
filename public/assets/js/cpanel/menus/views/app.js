@@ -1,5 +1,4 @@
-define(['collections/menus','collections/items', 'views/menu','views/item'],
- function (MenuCollection, MenuItemCollection, MenuView, ItemView) {
+define(['collections/menus', 'views/menu'], function (MenuCollection,  MenuView) {
 
 	var AppView = Backbone.View.extend({
 
@@ -7,27 +6,14 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 
 		events: {
 			'click .toogle-menu-form': "toggleMenuForm",
-			'click .toggle-item-form': "toggleItemForm",
-			'click .new-trigger': "toggleNewForm",
-			'click .new-group-form-toggle': "toggleGroupForm",
-			'click #save-category-btn':"saveCategory",
-			'click #save-group-btn': "saveGroup",
-			'change #item-menu': "onItemMenuChange",
-			'change #item-category': "onItemCategoryChange",
 			'click #save-menu-btn': "addMenu",
-			'click #save-item-btn': "addItem"
+			'click .item .activate-item': 'activateItem',
+			'click .item .deactivate-item': 'deactivateItem'
 		},
 
 		ui: {
 			'menuForm': '#menu-form',
-			'menulist': '.menu-list',
-			'itemlist': '.item-list',
-			'itemname': '#item-name',
-			'itemprice': '#item-price',
-			'itemmenu': "#item-menu",
-			'itemcategory': '#item-category',
-			'itemgroup': '#item-group',
-			'itemstatus': "#item-status"
+			'menulist': '.menu-list'
 		},
 
 		setUpUi: function() {
@@ -42,42 +28,6 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 		bindPlugins: function() {
 			var self = this;
 
-			$("#menu-item-modal").on('show', function() {
-				var menus = new Array();
-
-				self.menus.each(function(menu) {
-					var obj = { id: menu.id, text: menu.get('name') };
-					menus.push(obj);
-				});
-				
-				self.ui.itemmenu.select2({
-					placeholder: "Select a menu",
-					data: function() { return {results: menus} }
-				});
-
-				self.ui.itemcategory.select2({
-					placeholder: "Select a category",
-					data: function() { return {results: {}} }
-				});
-
-				self.ui.itemgroup.select2({
-					placeholder: "Select a group",
-					data: function() { return { results: {} } }
-				});
-			});
-
-			$("#menu-item-modal").on('hide', function() {
-				$(this).attr('data-mode','create');
-
-				self.ui.itemname.val('');
-				self.ui.itemprice.val('');
-
-				self.ui.itemmenu.html('');
-				self.ui.itemmenu.select2('data', null, false);
-
-				self.ui.itemcategory.html('');
-				self.ui.itemcategory.select2('destroy');
-			});
 		},
 
 		initialize: function() {
@@ -86,21 +36,14 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 			//instantiate the MenuCollection
 			this.menus = new MenuCollection;
 			this.menus.comparator = 'name';
-			//instantiate the MenuItemCollection
-			this.menuitems = new MenuItemCollection;
-
+		
 			//bind to collection events
 			this.menus.on('add', this.renderMenu, this);
 			this.menus.on('remove', this.renderMenuList, this);
 			this.menus.on('reset', this.renderMenuList, this);
 
-			this.menuitems.on('add', this.renderItem, this);
-			this.menuitems.on('remove', this.renderItems, this);
-			this.menuitems.on('reset', this.renderItems, this);
-
 			//reset collections
 			this.menus.reset(menus);
-			this.menuitems.reset(menu_items);
 
 			this.bindPlugins();
 		},
@@ -127,197 +70,9 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 				this.ui.menulist.prepend( view.render().el );
 		},
 
-		renderItem: function (item) {
-			$('.menu-items-empty').hide()
-
-			var template = _.template( $('#menu-item-tmpl').html() ),
-				view = new ItemView({ model: item, template: template, parent: this});
-
-				this.ui.itemlist.prepend(view.render().el);
-		},
-
-		renderItems: function() {
-			if(this.menuitems.length < 1) {
-				$('.menu-items-empty').show();
-			}
-			else {
-				$('.menu-items-empty').hide();
-				this.ui.itemlist.html('');
-				this.menuitems.each(this.renderItem, this);	
-			}
-		},
-
-		/** Utility Methods **/
-		populateCategories: function (categories) {
-			
-			var items = new Array();
-			_.each(categories, function(category) {
-				var obj = { id: category.id, text: category.name};
-				items.push(obj);
-			});
-
-			this.ui.itemcategory.select2({data: items});
-		},
-
-		populateGroups: function (groups) {
-			var items = new Array();
-			console.log(groups);
-
-			_.each(groups, function(group) {
-				var obj = { id: group.id, text: group.name};
-				items.push(obj);
-			});
-
-			this.ui.itemgroup.select2({data: items});
-		},
-
 		/** UI Event Methods **/ 
 		toggleMenuForm: function() {
 			this.ui.menuForm.slideToggle();
-		},
-
-		toggleItemForm: function() {
-			$('#menu-item-modal').modal('toggle')
-		},
-
-		toggleNewForm: function (event) {
-
-			var el = $(event.currentTarget);
-			var form = el.next();
-
-			form.slideToggle();
-
-			event.preventDefault();
-		},
-
-		toggleGroupForm: function (event) {
-
-			var el = $(event.currentTarget);
-			var form = el.next()
-
-			form.slideToggle();
-			event.preventDefault();
-		},
-
-		saveCategory: function (event) {
-
-			var el = $(event.currentTarget),
-				self = this;
-
-				el.prop('disbabled', true);
-				el.html('Saving...');
-
-			if(!this.ui.itemmenu.val())
-				alert("Please select a menu");
-
-			var data = { name: $('#new-category-name').val(), menu: this.ui.itemmenu.val()};
-			var url = Cpanel.Constants.url+"/menus/category";
-
-			$.ajax({
-				url: url,
-				type:'POST',
-				data: data,
-				dataType: 'json',
-				success: function (response, status, xhr) {
-					if(response.status == "success") {
-						//category name field
-						$('#new-category-name').val('');
-						//enable button
-						el.prop('disbabled', false);
-						//revert to original button text
-						el.html('Save Category');
-						//hide form
-						$('.new-form').slideUp();
-						//find menu
-						var id = response.model.menu_id;
-						var menu = self.menus.get(id);
-						//add category to the menu
-						var categories = menu.get('categories');
-						categories.push(response.model);
-
-						self.populateCategories(categories);
-					}
-				}
-			})
-		},
-
-		saveGroup: function (event) {
-			var el = $(event.currentTarget),
-				self = this;
-
-				el.prop('disbabled', true);
-				el.html('Saving...');
-
-			if(!this.ui.itemcategory.val())
-				alert("Please select a category");
-
-			var data = { name: $('#new-group-name').val(), menu: this.ui.itemmenu.val(), category: this.ui.itemcategory.val() };
-			var url = Cpanel.Constants.url+"/menus/group";
-
-			$.ajax({
-				url: url,
-				type:'POST',
-				data: data,
-				dataType: 'json',
-				success: function (response, status, xhr) {
-					if(response.status == "success") {
-						//category name field
-						$('#new-group-name').val('');
-						//enable button
-						el.prop('disbabled', false);
-						//revert to original button text
-						el.html('Save group');
-						//hide form
-						$('.new-group-form').slideUp();
-						//find category
-						var model = response.model;
-						var id = model.menu_category_id;
-						var menu = self.menus.get(data.menu);
-						var categories = menu.get('categories');
-						var thiscategory;
-						
-						_.each(categories, function(category) {
-							if(category.id == id) {
-								category.groups.push(model);
-								thiscategory = category;
-							}
-						});
-
-						self.populateGroups(thiscategory.groups);
-					}
-				}
-			})
-		},
-
-		onItemMenuChange: function (event) {
-
-			var el = $(event.currentTarget);
-				id = el.val();
-
-			var menu = this.menus.get(id),
-				categories = menu.get('categories');
-
-			this.populateCategories(categories);
-		},
-
-		onItemCategoryChange: function (event) {
-
-			var el = $(event.currentTarget);
-				id = el.val(),
-				menuid = this.ui.itemmenu.val();
-
-
-			var menu = this.menus.get(menuid);
-			var categories = menu.get('categories');
-			var thiscategory;
-
-			_.each(categories, function(category) {
-				if(category.id == id) {
-					thiscategory = category;
-				}
-			});
-
-			this.populateGroups(thiscategory.groups);
 		},
 
 		addMenu: function (event) {
@@ -350,64 +105,46 @@ define(['collections/menus','collections/items', 'views/menu','views/item'],
 			}
 		},
 
-		addItem: function (event) {
-
+		activateItem: function (event) {
 			var el = $(event.currentTarget),
-				self = this, modal = $('#menu-item-modal'),
-				mode = modal.attr('data-mode');
-				//disbable button
-				el.prop('disbabled', true);
-				//show process activity indicator
-				el.html('Saving...');
+				id = el.attr('data-id'),
+				url = Cpanel.Constants.url+"/menus/item/activate/"+id;
 
-			//new item model
-			var model = {
-				"restaurant_id": rid,
-				"name": this.ui.itemname.val(),
-				"price": this.ui.itemprice.val(),
-				"menu_id": this.ui.itemmenu.val(),
-				"menu_category_id": this.ui.itemcategory.val(),
-				"item_group_id": this.ui.itemgroup.val(),
-				"active": this.ui.itemstatus.val()
-			};
-
-			if(mode == "create") {
-				this.menuitems.create(model, {
-					wait: true,
-					success: function (model, response, options) {
-						if(response) {
-							el.prop('disbabled', false);
-							el.html('Save');
-
-							$('#menu-item-modal').modal('hide')
+				$.ajax({
+					url: url,
+					type: 'GET',
+					dataType: 'json',
+					success: function (response, status, xhr) {
+						if(response.status == "success") {
+							el.attr('class','deactivate-item');
+							el.attr('title','Click to deactivate item');
+							el.find('div.status-icon').removeClass('red').addClass('green');
 						}
 					}
 				});
-			}
-			else if(mode == "edit") {
-				var id = modal.attr('data-model-id');
-				var item = this.menuitems.get(id);
-				var attrs = { 
-					"name": this.ui.itemname.val(),
-					"price": this.ui.itemprice.val(),
-					"menu_id": this.ui.itemmenu.val(),
-					"menu_category_id": this.ui.itemcategory.val(),
-					"active": this.ui.itemstatus.val()
-				}
-				console.log(item);
 
-				item.save(attrs, {
-					wait: true,
-					success: function (model, response, options) {
-						if(response) {
-							el.prop('disbabled', false);
-							el.html('Save');
+			event.preventDefault();
+		},
 
-							$('#menu-item-modal').modal('hide')
+		deactivateItem: function (event) {
+			var el = $(event.currentTarget),
+				id = el.attr('data-id'),
+				url = Cpanel.Constants.url+"/menus/item/deactivate/"+id;
+
+				$.ajax({
+					url: url,
+					type: 'GET',
+					dataType: 'json',
+					success: function (response, status, xhr) {
+						if(response.status == "success") {
+							el.attr('class','activate-item');
+							el.attr('title','Click to activate item');
+							el.find('div.status-icon').removeClass('green').addClass('red');
 						}
 					}
 				});
-			}
+
+			event.preventDefault();
 		}
 	});
 

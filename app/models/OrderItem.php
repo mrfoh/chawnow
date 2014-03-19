@@ -4,7 +4,7 @@
 	{
 		protected $table = 'order_items';
 
-		protected $fillable = array("order_id","item_id","qty");
+		protected $fillable = array("order_id","item_id","qty","options");
 
 		public function order()
 		{

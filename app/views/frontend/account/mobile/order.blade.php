@@ -31,6 +31,11 @@ Order #{{ $order->id }} | Chawnow | Online Food Ordering
 				<li class="clearfix ui-shadow">
 					<div class="pull-left name">
 						{{ $orderitem->item->name }}<br/>
+						@if($orderitem->options)
+			           		@foreach(unserialize($orderitem->options) as $key => $option)
+				            <p>({{ $key }} - {{ $option }})</p>
+				            @endforeach
+				        @endif
 						<b class="naira">N</b>{{ number_format($orderitem->item->price, 2) }}
 					</div>
 					<div class="pull-right qty">

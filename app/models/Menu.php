@@ -17,4 +17,15 @@
 		{
 			return $this->hasMany('Item');
 		}
+
+		protected static function boot() {
+		
+	        parent::boot();
+
+	        static::deleting(function($menu) { // before delete() method call this
+	             $menu->items()->delete();
+	             $menu->categories()->delete();
+	             // do the rest of the cleanup...
+	        });
+    	}
 	}

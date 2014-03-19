@@ -208,6 +208,57 @@
 							{
 								span { padding-right: 10px; }
 							}
+
+							.item-description
+							{
+								width: 70%;
+								font-size: .85em;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#option-modal
+	{
+		.modal-header {
+			background: @red;
+			color: #FFF;
+			.close { color: #FFF; }
+			.border-radius-top(4px);
+		}
+
+		.option-list
+		{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			.item-option-widget
+			{
+				.border-radius(10px);
+				background: url("@{imagepath}/searchform-bg.png") repeat;
+				padding: 10px;
+				margin-bottom: 10px;
+
+				.option-values
+				{
+					margin: 0;
+					padding: 0;
+					list-style: none;
+
+					li 
+					{
+						display: inline-block;
+						float: left;
+						padding: 10px 15px;
+						margin-bottom: 5px;
+						.transition(background, 0.25s, ease-in);
+						.border-radius(10px);
+						&:hover {
+							background: #FFF;
 						}
 					}
 				}

@@ -12,14 +12,21 @@
 					@foreach($group['items'] as $item)
 					<li>
 						<div class="menu-item clearfix" data-menu-id="{{ $menu['id'] }}" data-category="{{ $category['id'] }}">
-						<div class="item-name pull-left">{{ $item['name'] }}</div>
-						<div class="item-price pull-right">
-							<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}</span>
-							<button title="Click to add this to your order" class="btn btn-sm btn-warning add-to-cart" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-item-price="{{ $item['price'] }}">
-								<i class="icon-plus-sign icon-large"></i>
-							</button>
+							<div class="clearfix">
+								<div class="item-name pull-left">{{ $item['name'] }}</div>
+								<div class="item-price pull-right">
+									@if($item['options'])
+									<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}+</span>
+									@else
+									<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}</span>
+									@endif
+									<button title="Click to add this to your order" class="btn btn-sm btn-warning add-to-cart" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-item-price="{{ $item['price'] }}" data-options="{{ ($item['options']) ? true : false }}">
+										<i class="icon-plus-sign icon-large"></i>
+									</button>
+								</div>
+							</div>
+							<div class="item-description clearfix">{{ $item['description'] }}</div>
 						</div>
-					</div>
 					</li>
 					@endforeach
 				@endforeach
@@ -29,13 +36,20 @@
 				@foreach($category['items'] as $item)
 				<li>
 					<div class="menu-item clearfix" data-menu-id="{{ $menu['id'] }}" data-category="{{ $category['id'] }}">
-						<div class="item-name pull-left">{{ $item['name'] }}</div>
-						<div class="item-price pull-right">
-							<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}</span>
-							<button title="Click to add this to your order" class="btn btn-sm btn-warning add-to-cart" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-item-price="{{ $item['price'] }}">
-								<i class="icon-plus-sign icon-large"></i>
-							</button>
+						<div class="clearfix">
+							<div class="item-name pull-left">{{ $item['name'] }}</div>
+							<div class="item-price pull-right">
+								@if($item['options'])
+								<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}+</span>
+								@else
+								<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}</span>
+								@endif
+								<button title="Click to add this to your order" class="btn btn-sm btn-warning add-to-cart" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-item-price="{{ $item['price'] }}" data-options="{{ ($item['options']) ? 'true': 'no' }}">
+									<i class="icon-plus-sign icon-large"></i>
+								</button>
+							</div>
 						</div>
+						<div class="item-description clearfix">{{ $item['description'] }}</div>
 					</div>
 				</li>
 				@endforeach
@@ -47,13 +61,20 @@
 		@foreach($menu['items'] as $item)
 		<li>
 			<div class="menu-item clearfix" data-menu-id="{{ $menu['id'] }}" data-category="">
-				<div class="item-name pull-left">{{ $item['name'] }}</div>
-				<div class="item-price pull-right">
-					<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}</span>
-					<button title="Click to add this to your order" class="btn btn-sm btn-warning add-to-cart" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-item-price="{{ $item['price'] }}">
-						<i class="icon-plus-sign icon-large"></i>
-					</button>
+				<div class="clearfix">
+					<div class="item-name pull-left">{{ $item['name'] }}</div>
+					<div class="item-price pull-right">
+						@if($item['options'])
+						<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}+</span>
+						@else
+						<span><b class="naira">N</b>{{ number_format($item['price'], 2) }}</span>
+						@endif
+						<button title="Click to add this to your order" class="btn btn-sm btn-warning add-to-cart" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-item-price="{{ $item['price'] }}" data-options="{{ ($item['options']) ? 'true': 'no' }}">
+							<i class="icon-plus-sign icon-large"></i>
+						</button>
+					</div>
 				</div>
+				<div class="item-description clearfix">{{ $item['description'] }}</div>
 			</div>
 		</li>
 		@endforeach

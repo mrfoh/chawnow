@@ -3,10 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Chawnow</title>
-		{{ HTML::style('assets/css/bootstrap.min.css') }}
 	</head>
 
 	<body>
+		{{ HTML::style('assets/css/bootstrap.min.css') }}
+
 		<div class="container">
 			<h3>Hello, {{ $order->restaurant->name }}</h3>
 			<h2>You have a new order</h2>
@@ -37,6 +38,7 @@
 							<tr>
 			                  <th>Quantity</th>
 			                  <th>Item Name</th>
+			                  <th>Options</th>
 			                  <th>Unit Price</th>
 			                  <th>Total</th>
 			                </tr>
@@ -46,6 +48,13 @@
 		              	  <tr>
 		              	  	  <td>{{ $orderitem->qty }}</td>
 			                  <td>{{ $orderitem->item->name }}</td>
+			                  <td>
+			                  	@if($orderitem->options)
+			                  	@foreach(unserialize($orderitem->options) as $key => $option)
+				                <p>{{ $key }} = {{ $option }}</p>
+				                @endforeach
+				                @endif
+			                  </td>
 			                  <td><b class="naira">N</b>{{ number_format($orderitem->item->price, 2) }}</td>
 			                  <td><b class="naira">N</b>{{ number_format(($orderitem->item->price*$orderitem->qty), 2) }}</td>
 		              	  </tr>

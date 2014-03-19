@@ -14,4 +14,14 @@
 		{
 			return $this->hasMany('ItemGroup', 'menu_category_id');
 		}
+
+		protected static function boot()
+		{
+			parent::boot();
+
+	        static::deleting(function($category) { // before delete() method call this
+	             $category->groups()->delete();
+	             // do the rest of the cleanup...
+	    	});
+		}
 	}

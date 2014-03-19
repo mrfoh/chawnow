@@ -19,6 +19,30 @@ Chawnow.data = {
 }
 </script>
 
+<script type="text/template" id="item-options-tmpl">
+<li data-option-id="<%= id %>" class="item-option-widget">
+	<h4>Choose a <%= name %> <% if (required) { %> (required) <% } %></h4>
+	<ul class="option-values clearfix">
+	<% _.each(values, function(value) { %> 
+		<li>
+			<div class="radio">
+			<label>
+			    <input type="radio" name="option-<%= id %>" id="option-<%= id %>" value="<%= value.id %>">
+			    <%= value.value %> <br/> <% if(value.price != 0) { %> <b class="naira">N</b><%= value.price %> <% } %>
+			  </label>
+			</div>
+		</li>
+	<% }) %>
+	</ul>
+</li>
+</script>
+
+<script type="text/temlate" id="add-button-tmpl">
+<button type="button" class="btn btn-lg btn-block btn-warning add-item" data-id="<%= id %>" data-name="<%= name %>", data-price="<%= price %>">
+<i class="icon-plus-sign"></i> Add Item
+</button>
+</script>
+
 <script type="text/template" id="cart-item-tmpl">
 <li data-rowid="<%= rowid %>" class="clearfix">
 	<div class="pull-left">
@@ -207,6 +231,23 @@ Chawnow.data = {
 			@else
 				<p>Restaurant is closed</p>
 			@endif
+			</div>
+		</div>
+	</div>
+
+	<!-- Option Modal -->
+	<div class="modal fade" id="option-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        			<h4 class="modal-title">Select your options</h4>
+				</div>
+
+				<div class="modal-body">
+					<ul class="option-list"></ul>
+				</div>
 			</div>
 		</div>
 	</div>

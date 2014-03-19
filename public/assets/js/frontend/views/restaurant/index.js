@@ -6,7 +6,8 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 		'click .increase-qty': 'onIncreaseQtyClick',
 		'click .checkout-btn': 'onCheckoutBtnClick',
 		'click a.menu-category': "onMenuCategoryClick",
-		'click .add-to-cart': 'onAddToCartClick'
+		'click .add-to-cart': 'onAddToCartClick',
+		'click .add-item': 'onAddItemClick'
 	},
 
 	setUpUi: function() {
@@ -21,6 +22,11 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 	initialize: function() {
 		//set up ui
 		this.setUpUi();
+		this.menus = new Backbone.Collection;
+		this.menus.reset(Chawnow.data.menus);
+
+		this.menuItems = new Backbone.Collection;
+		this.menuItems.reset(Chawnow.data.items);
 		//render a default menu
 		this.renderDefaultMenu();
 	},
@@ -183,10 +189,64 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 		var el = $(event.currentTarget),
 			itemid = el.attr('data-id'),
 			itemname = el.attr('data-item-name'),
-			itemprice = el.attr('data-item-price');
-			url = Chawnow.Constants.url+"/cart/add",
+			itemprice = el.attr('data-item-price'),
 			data = { id : itemid, name: itemname, price: itemprice , restaurant: Chawnow.data.restaurant.uid },
+			hasOptions = el.attr('data-options'),
+			optionModal = $('#option-modal'),
 			self = this;
+
+			if(hasOptions == "true")
+			{
+				//show option modal
+				optionModal.modal({ keyboard: true, backdrop: 'static' });
+				//get options
+				var itemsoptions = this.getItemOptions(itemid);
+				//render options
+				this.renderItemOptions(itemsoptions, itemid);
+			}
+			else
+			{
+				this.addToCart(data);
+			}
+
+		event.preventDefault();
+	},
+
+	onAddItemClick: function (event) {
+		var el = $(event.currentTarget),
+			itemid = el.attr('data-id'),
+			itemname = el.attr('data-name'),
+			itemprice = el.attr('data-price'),
+			optionModal = $('#option-modal'),
+			self = this;
+
+		//get options selections
+		var options = this.getOptionSelections(itemid);
+		var data = { id : itemid, name: itemname, price: itemprice , restaurant: Chawnow.data.restaurant.uid , selections: options};
+
+		this.addToCart(data);
+		optionModal.modal('hide');
+	},
+
+	getOptionSelections: function(id) {
+		var item = this.menuItems.get(id);
+		var options = item.get('options');
+
+		var selections = new Array();
+
+		_.each(options, function(option) {
+			var optionid = 'input[name="option-'+option.id+'"]:checked';
+			var selection = $(optionid).val();
+
+			selections.push(selection);
+		});
+
+		return selections;
+	},
+
+	addToCart: function (data) {
+		var url = Chawnow.Constants.url+"/cart/add";
+		var self = this;
 
 		this.ui.cartcontent.slideUp();
 		this.ui.cart.find('.loading-indicator').slideDown();
@@ -200,14 +260,36 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 				self.ui.cart.find('.loading-indicator').slideUp();
 				self.requestSuccess(response, status, xhr, self);
 			}
-		})
-		event.preventDefault();
+		});
 	},
 
 	requestSuccess: function (response, status, xhr, view) {
 		if(response.status == "success") {
 			view.renderCartContents(response.contents, response.total);
 		}
+	},
+
+	getItemOptions: function (id) {
+		var item = this.menuItems.get(id);
+		var options = item.get('options');
+
+		return options;
+	},
+
+	renderItemOptions: function (options, itemid) {
+		var template = _.template($("#item-options-tmpl").html());
+		var btnTemplate = _.template($("#add-button-tmpl").html());
+		var modal = $('#option-modal');
+		var list = modal.find('.option-list');
+		var item = this.menuItems.get(itemid).toJSON();
+
+		list.html('');
+
+		_.each(options, function(option) {
+			list.prepend( template(option) );
+		});
+
+		list.append(btnTemplate(item));
 	}
 });
 

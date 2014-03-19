@@ -54,6 +54,7 @@
 						<tr>
 		                  <th width="60" class="unseen text-center">QTY</th>
 		                  <th class="text-left">ITEM NAME</th>
+		                  <th class="text-left">ITEM OPTIONS</th>
 		                  <th width="140" class="text-right">UNIT PRICE</th>
 		                  <th width="90" class="text-right">TOTAL</th>
 		                </tr>
@@ -63,6 +64,13 @@
 	              	  <tr>
 	              	  	  <td class="unseen text-center">{{ $orderitem->qty }}</td>
 		                  <td>{{ $orderitem->item->name }}</td>
+		                  <td>
+		                  	@if($orderitem->options)
+		                  	@foreach(unserialize($orderitem->options) as $key => $option)
+			                <p>{{ $key }} = {{ $option }}</p>
+			                @endforeach
+			                @endif
+		                  </td>
 		                  <td class="text-right"><b class="naira">N</b>{{ number_format($orderitem->item->price, 2) }}</td>
 		                  <td class="text-right"><b class="naira">N</b>{{ number_format(($orderitem->item->price*$orderitem->qty), 2) }}</td>
 	              	  </tr>

@@ -11,7 +11,9 @@ Chawnow.data = {
 				  status: {{ (int) $status }},
 				  delivery_fee: {{ $restaurant->meta->delivery_fee }},
 				  minimium: {{ $restaurant->meta->minimium }}
-				}
+				},
+	menus: {{ json_encode($menus) }},
+	items: {{ json_encode($items) }}
 }
 </script>
 <!-- Templates -->
@@ -27,6 +29,19 @@ Chawnow.data = {
 		<a href="#" class="ui-btn ui-btn-inline ui-icon-carat-u ui-btn-icon-notext increase-qty" data-rowid="<%= rowid %>"></a>
 	</div>
 </li>
+</script>
+
+<script type="text/template" id="option-tmpl">
+<label for="option-<%= id %>" class="select">Choose a <%= name %> <% if (required) { %> (required) <% } %></label>
+<select name="option-<%= id %>" id="option-<%= id %>">
+<% _.each(values, function(value) { %> 
+	<option value="<%= value.id %>"><%= value.value %> <% if(value.price != 0) { %> N<%= value.price %> <% } %></option>
+<% }) %>
+</select>
+</script>
+
+<script type="text/template" id="add-btn-tmpl">
+<button type="button" class="ui-btn btn-warning add-item" data-id="<%= id %>" data-name="<%= name %>", data-price="<%= price %>">Add item</button>
 </script>
 {{ HTML::script('assets/js/frontend/views/restaurant/mobile.index.js') }}
 
@@ -90,9 +105,9 @@ $(document).bind('pageinit', function() {
 							@foreach($category['groups'] as $group)
 							<li class="group-name ui-shadow">{{ $group['name'] }}</li>
 								@foreach($group['items'] as $item)
-								<li class="clearfix item ui-shadow" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
+								<li class="clearfix item ui-shadow" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}" data-options="{{ ($item['options']) ? 'true' : 'false'}}">
 									<div class="item-name pull-left">{{ $item['name'] }}</div>
-									<div class="item-price pull-right" style="font-size: .8em"><b class="naira">N</b>{{ number_format($item['price'], 2) }}</div>
+									<div class="item-price pull-right" style="font-size: .8em"><b class="naira">N</b>{{ number_format($item['price'], 2) }}{{ ($item['options']) ? "+" : "" }}</div>
 								</li>
 								@endforeach
 							@endforeach
@@ -100,9 +115,9 @@ $(document).bind('pageinit', function() {
 							@else
 							<ul class="menu-items">
 							@foreach($category['items'] as $item)
-							<li class="clearfix item ui-shadow" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
+							<li class="clearfix item ui-shadow" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}" data-options="{{ ($item['options']) ? 'true' : 'false'}}">
 								<div class="item-name pull-left">{{ $item['name'] }}</div>
-								<div class="item-price pull-right" style="font-size: .8em"><b class="naira">N</b>{{ number_format($item['price'], 2) }}</div>
+								<div class="item-price pull-right" style="font-size: .8em"><b class="naira">N</b>{{ number_format($item['price'], 2) }}{{ ($item['options']) ? "+" : "" }}</div>
 							</li>
 							@endforeach
 							</ul>
@@ -111,15 +126,23 @@ $(document).bind('pageinit', function() {
 					@else
 						<ul class="menu-items">
 						@foreach($menu['items'] as $item)
-							<li class="clearfix item ui-shadow" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
+							<li class="clearfix item ui-shadow" data-id="{{ $item['id'] }}" data-item-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}" data-options="{{ ($item['options']) ? 'true' : 'false'}}">
 								<div class="item-name pull-left">{{ $item['name'] }}</div>
-								<div class="item-price pull-right" style="font-size: .8em"><b class="naira">N</b>{{ number_format($item['price'], 2) }}</div>
+								<div class="item-price pull-right" style="font-size: .8em"><b class="naira">N</b>{{ number_format($item['price'], 2) }}{{ ($item['options']) ? "+" : "" }}</div>
 							</li>
 						@endforeach
 						</ul>
 					@endif
 			@endforeach
 			</ul>
+
+			<div data-role="popup" id="item-option-popup" data-position-to="origin">
+				<div class="inner">
+					<h3>Select your options</h3>
+					<div class="item-options">
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div id="myorder" class="tablist-content user-cart">

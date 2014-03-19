@@ -262,6 +262,9 @@
 				$orderitem->item_id = $item['id'];
 				$orderitem->qty = $item['qty'];
 
+				if(isset($item['options']))
+					$orderitem->options = serialize($item['options']);
+				
 				$orderitem->save();
 			}
 

@@ -48,10 +48,12 @@
 			$data['id'] = $item->id;
 			$data['menu_name'] = $item->menu->name;
 			$data['name'] = $item->name;
+			$data['description'] = $item->description;
 			$data['price'] = $item->price;
 			$data['active'] = (bool) $item->active;
 			$data['category'] = ($item->category) ? $item->category->toArray() : NULL;
 			$data['group'] = ($item->group) ? $item->group->toArray() : NULL;
+			$data['options'] = ($item->options) ? $item->options->toArray() : NULL;
 			$data['menu'] = $item->menu->toArray();
 			$data['created_at'] = date('c', strtotime($item->created_at));
 
@@ -71,7 +73,18 @@
 		public static function all($id, $active = "yes")
 		{
 			$restaurantmenus = array();
-			$relationships = array("items","categories","categories.items","categories.groups","categories.groups.items");
+			$relationships = array(
+				"items",
+				"items.options",
+				"items.options.values",
+				"categories",
+				"categories.items",
+				"categories.items.options",
+				"categories.items.options.values",
+				"categories.groups",
+				"categories.groups.items",
+				"categories.groups.item.options",
+				"categories.groups.item.options.values");
 
 			//Active menus
 			if($active == "yes")
@@ -115,16 +128,6 @@
 			}
 		}
 
-		/**
-		* Retrieves all items in a menu
-		* @access public
-		* @param integer $id
-		* ID of the Menu
-		* @return array
-		*/
-		public static function items($menuid) {
-
-		}
 
 		/**
 		* Retrieves all a restaurants menu items
@@ -136,17 +139,18 @@
 		public static function allItems($id, $active = "all") {
 
 			$items = array();
+			$relationships = array('category','menu','options','options.values');
 
 			if($active == "all")
 			{
-				$restaurantItems = Item::with(array('category','menu'))
+				$restaurantItems = Item::with($relationships)
 									->where('restaurant_id','=', $id)
 									->orderBy('created_at','asc')
 									->get();	
 			}
 			elseif($active = "yes")
 			{
-				$restaurantItems = Item::with(array('category','menu'))
+				$restaurantItems = Item::with($relationships)
 									->where('restaurant_id','=', $id)
 									->where('active','=',1)
 									->orderBy('created_at','asc')
@@ -154,7 +158,7 @@
 			}
 			elseif($active = "no")
 			{
-				$restaurantItems = Item::with(array('category','menu'))
+				$restaurantItems = Item::with($relationships)
 									->where('restaurant_id','=', $id)
 									->where('active','=',0)
 									->orderBy('created_at','asc')
@@ -170,6 +174,14 @@
 			}
 
 			return $items;
+		}
+
+		public static function getItem($id)
+		{
+			$relationships = array('category','group','options','options.values');
+			$model = Item::with($relationships)->find($id);
+
+			return $model;
 		}
 
 		/**
@@ -189,8 +201,40 @@
 			}
 
 			if($item->save()) {
-				$newitem = Item::with(array('category','menu'))->find($item->id);
-				return self::formatItemArray($newitem);
+				return $item->id;
+			}
+		}
+
+		public static function addItemOptions($options, $id)
+		{
+			if($options && is_array($options))
+			{
+				self::clearItemOptions($id);
+
+				foreach($options as $option)
+				{
+					$decoded = json_decode($option);
+
+					$itemOption = new itemOption;
+					$itemOption->item_id = $id;
+					$itemOption->name = $decoded->name;
+					$itemOption->required = (int) $decoded->required;
+
+					$itemOption->save();
+
+					foreach($decoded->values as $valueobj)
+					{
+						$itemOptionValue = new itemOptionValue;
+
+						$itemOptionValue->option_id = $itemOption->id;
+						$itemOptionValue->value = $valueobj->value;
+						$itemOptionValue->price = $valueobj->price;
+
+						$itemOptionValue->save();
+					}
+				}
+
+				return true;
 			}
 		}
 
@@ -212,9 +256,19 @@
 			}
 
 			if($item->save()) {
-				$newitem = Item::with(array('category','menu'))->find($item->id);
-				return self::formatItemArray($newitem);
+				return true;
 			}
+		}
+
+		private static function clearItemOptions($id)
+		{
+			$item = self::getItem($id);
+			
+			foreach($item->options as $option) {
+				$option->delete();
+			}
+
+			return true;
 		}
 
 		/**

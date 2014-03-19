@@ -46,6 +46,7 @@ Order #{{ $order->id }} | Chawnow | Online Food Ordering
 							<tr>
 			                  <th>Quantity</th>
 			                  <th>Item Name</th>
+			                  <th>Options</th>
 			                  <th>Unit Price</th>
 			                  <th>Total</th>
 			                </tr>
@@ -55,6 +56,13 @@ Order #{{ $order->id }} | Chawnow | Online Food Ordering
 		              	  <tr>
 		              	  	  <td>{{ $orderitem->qty }}</td>
 			                  <td>{{ $orderitem->item->name }}</td>
+			                  <td>
+			                  	@if($orderitem->options)
+			                  	@foreach(unserialize($orderitem->options) as $key => $option)
+				                <p>{{ $key }} = {{ $option }}</p>
+				                @endforeach
+				                @endif
+			                  </td>
 			                  <td><b class="naira">N</b>{{ number_format($orderitem->item->price, 2) }}</td>
 			                  <td><b class="naira">N</b>{{ number_format(($orderitem->item->price*$orderitem->qty), 2) }}</td>
 		              	  </tr>

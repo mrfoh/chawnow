@@ -2,15 +2,46 @@
 	
 	class CartController extends Controller 
 	{
+		private function parseSelections($selections)
+		{
+			$options = array();
+			$price = 0;
+			foreach($selections as $selection)
+			{
+				$optionValue = ItemOptionValue::with('option')->find($selection);
+				if($optionValue) {
+					$options[$optionValue->option->name] = $optionValue->value;
+
+					if($optionValue->price > 0)
+						$price += $optionValue->price;
+				}
+			}
+
+			return array("options"=>$options, "price" =>$price);
+		}
+
+
 		public function add()
 		{
 			$name = Input::get('name');
 			$price = Input::get('price');
 			$qty = (Input::get('qty')) ? Input::get('qty') : 1;
 			$id = Input::get('id');
+			$selections = Input::get('selections');
 			$restaurant = Input::get('restaurant');
 
-			$item = array("id"=>$id, "qty"=>$qty, "name"=>$name, "price"=>$price);
+			if(!$selections) {
+				$item = array("id"=>$id, "qty"=>$qty, "name"=>$name, "price"=>$price);
+			} else {
+				$options = $this->parseSelections($selections, $price);
+				$item = array(
+					"id"=>$id,
+					"qty"=>$qty,
+					"name"=>$name,
+					"price"=>($options['price'] == 0) ? $price : $options['price'],
+					'options'=>$options['options']
+				);
+			}
 
 			$existing = Session::get('activecart');
 			if($existing)
