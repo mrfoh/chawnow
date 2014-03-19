@@ -145,7 +145,7 @@
 			{
 				$restaurantItems = Item::with($relationships)
 									->where('restaurant_id','=', $id)
-									->orderBy('created_at','asc')
+									->orderBy('created_at','desc')
 									->get();	
 			}
 			elseif($active = "yes")
@@ -153,7 +153,7 @@
 				$restaurantItems = Item::with($relationships)
 									->where('restaurant_id','=', $id)
 									->where('active','=',1)
-									->orderBy('created_at','asc')
+									->orderBy('created_at','desc')
 									->get();
 			}
 			elseif($active = "no")
@@ -161,7 +161,7 @@
 				$restaurantItems = Item::with($relationships)
 									->where('restaurant_id','=', $id)
 									->where('active','=',0)
-									->orderBy('created_at','asc')
+									->orderBy('created_at','desc')
 									->get();
 			}
 			
