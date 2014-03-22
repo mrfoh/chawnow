@@ -46,7 +46,6 @@
 		private static function formatItemArray($item)
 		{
 			$data['id'] = $item->id;
-			$data['menu_name'] = $item->menu->name;
 			$data['name'] = $item->name;
 			$data['description'] = $item->description;
 			$data['price'] = $item->price;

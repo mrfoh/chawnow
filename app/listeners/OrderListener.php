@@ -90,9 +90,12 @@
 						$optionString = $key." = ".$option;
 						$options[] = $optionString;
 					}
+					$orderitems[] = $oitems->item->name."x".$oitems->qty."(".implode(",", $options).")";
 				}
-
-				$orderitems[] = $oitems->item->name."x".$oitems->qty."(".implode(",", $options).")";
+				else
+				{
+					$orderitems[] = $oitems->item->name."x".$oitems->qty;
+				}				
 			}
 
 			$message = "New order. Order Type:".ucwords($order->type).",Customer Name:".$order->customer_name.",Customer Address:".$order->customer_address.",Customer Phone:".$order->customer_phone.". Customer Order: ".implode(",", $orderitems);

@@ -68,7 +68,7 @@
 			$contents = Shpcart::cart($restaurant)->contents();
 			$carttotal = Shpcart::cart($restaurant)->total();
 
-			return Response::json(array("status" => "success", "contents" => $contents, "total" => $carttotal));
+			return Response::json(array("status" => "success", "contents" => $contents, "total" => $carttotal), 200);
 		}
 
 		public function increaseItemQty($rowid)

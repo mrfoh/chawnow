@@ -122,6 +122,25 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 		}
 	},
 
+	requestError: function(jqXHR, exception) {
+		self.ui.cart.find('.loading-indicator').slideUp();
+		if (jqXHR.status === 0) {
+	       	alert('Not connect.\n Verify Network Connection.');
+	    } else if (jqXHR.status == 404) {
+	        alert('Request not found.');
+	    } else if (jqXHR.status == 500) {
+	        alert('Oops an error occured on the server, please try again later.');
+	    } else if (exception === 'parsererror') {
+	        alert('Requested JSON parse failed.');
+	    } else if (exception === 'timeout') {
+	        alert('Oops your request timed out, please try again.');
+	    } else if (exception === 'abort') {
+	        alert('Request aborted.');
+	    } else {
+	        alert('Unknown error');
+	    }
+	},
+
 	onReduceQtyClick: function (event) {
 		var el = $(event.currentTarget),
 			rowid = el.attr('data-rowid'),
@@ -138,7 +157,8 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 			success: function(response, status, xhr) {
 				self.ui.cart.find('.loading-indicator').slideUp();
 				self.requestSuccess(response, status, xhr, self);
-			}
+			},
+			error: self.requestError
 		})
 	},
 
@@ -158,7 +178,8 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 			success: function(response, status, xhr) {
 				self.ui.cart.find('.loading-indicator').slideUp();
 				self.requestSuccess(response, status, xhr, self);
-			}
+			},
+			error: self.requestError
 		})
 	},
 
@@ -259,6 +280,24 @@ Chawnow.Views.RestaurantPage = Backbone.View.extend({
 			success: function(response, status, xhr) {
 				self.ui.cart.find('.loading-indicator').slideUp();
 				self.requestSuccess(response, status, xhr, self);
+			},
+			error: function(jqXHR, exception) {
+				self.ui.cart.find('.loading-indicator').slideUp();
+				if (jqXHR.status === 0) {
+	                alert('Not connect.\n Verify Network Connection.');
+	            } else if (jqXHR.status == 404) {
+	                alert('Requested page not found.');
+	            } else if (jqXHR.status == 500) {
+	                alert('Oops an error occured on the server, please try again later.');
+	            } else if (exception === 'parsererror') {
+	                alert('Requested JSON parse failed.');
+	            } else if (exception === 'timeout') {
+	                alert('Oops your request timed out, please try again.');
+	            } else if (exception === 'abort') {
+	                alert('Request aborted.');
+	            } else {
+	                alert('Unknown error');
+	            }
 			}
 		});
 	},
