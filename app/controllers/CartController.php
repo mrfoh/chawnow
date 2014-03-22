@@ -6,6 +6,7 @@
 		{
 			$options = array();
 			$price = 0;
+			
 			foreach($selections as $selection)
 			{
 				$optionValue = ItemOptionValue::with('option')->find($selection);

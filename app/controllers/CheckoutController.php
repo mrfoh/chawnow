@@ -92,12 +92,12 @@
 				$guest = ($this->isLoggedin) ? false : true; //is guest or customer order
 				//create order
 				$order = Orders::createOrder($restaurant->id, $type, $guest, $customer);
-				if($order !== false)
+				if($order)
 				{
 					//trigger order.placed event
-					Event::fire('order.placed', array("order_id"=>$order));
+					Event::fire('order.placed', array("order"=>$order));
 
-					return Redirect::to('order/'.$order.'/verify');
+					return Redirect::to('order/'.$order->id.'/verify');
 				}
 			}
 			else
@@ -131,8 +131,8 @@
 			if($verify)
 			{
 				//fire event
-				Event::fire('order.verified', array("orderid"=>$id));
-				Event::fire('order.confirm', array("orderid"=>$id));
+				Event::fire('order.verified', array("order"=>$verify));
+				Event::fire('order.confirm', array("order"=>$verify));
 				//return response
 				return Response::json(array('status'=>"success"));
 			}

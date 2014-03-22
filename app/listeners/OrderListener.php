@@ -39,10 +39,8 @@
 		* Sends order verification message
 		* @param integer $orderid
 		**/
-		public function placed($orderid)
+		public function placed($order)
 		{
-			$order = Order::with('restaurant')->find($orderid);
-
 			$message = "You placed order to ".$order->restaurant->name.". Your verification code is: ".$order->verification_code.". Use this code to
 			verfiy your order.";
 			//Log
@@ -69,14 +67,12 @@
 		* Sends order verification message to restaurant
 		* @param integer $orderid
 		**/
-		public function verified($orderid)
+		public function verified($order)
 		{
-			$order = Orders::get($orderid);
-
 			//Notify restaurant via email
 			$data['order'] = $order;
 
-			Mail::later(20, 'emails.orders.verified', $data, function($message) use ($order) {
+			Mail::later(40, 'emails.orders.verified', $data, function($message) use ($order) {
 
 				$message->to($order->restaurant->email, $order->restaurant->name)
 						->subject('New order #'.$order->id);
@@ -110,14 +106,12 @@
 		* Sends order confirmation message to restaurant
 		* @param integer $orderid
 		**/
-		public function confirm($orderid)
+		public function confirm($order)
 		{
-			$order = Orders::get($orderid);
-
 			//Notify customer via email
 			$data['order'] = $order;
 
-			Mail::later(20,'emails.orders.confirm', $data, function($message) use ($order) {
+			Mail::later(40,'emails.orders.confirm', $data, function($message) use ($order) {
 
 				$message->to($order->customer_email, $order->customer_name)
 						->subject('Order Confirmation');

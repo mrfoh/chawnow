@@ -177,7 +177,7 @@
 				$order->status = "verified";
 				$order->save();
 
-				return true;
+				return self::get($id);
 			}
 			else
 			{
@@ -238,7 +238,7 @@
 			{
 				self::createOrderItems($order->id);
 
-				return $order->id;
+				return self::get($order->id);
 			}
 			else
 			{
