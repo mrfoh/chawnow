@@ -70,17 +70,12 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 		return Redirect::to('login');
 	});
 
-	//upload controller
-	Route::any('upload','UploadController@index');
-
 	Route::get('test', function() {
-		$orders = Orders::restaurant(3, "all");
-
-		echo "<pre>";
-		print_r($orders);
-		echo "</pre>";
+		$order = Orders::get(8);
 	});
 
+	//upload controller
+	Route::any('upload','UploadController@index');
 	Route::get('/', array('before' => 'cpanel_auth', 'uses' => 'CpanelHomeController@dashboard') );
 });
 

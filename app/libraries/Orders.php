@@ -98,11 +98,36 @@
 		{
 			$total = 0;
 			$subtotal = 0;
+
 			if($order)
 			{
 				foreach($order->items as $orderitem)
 				{
-					$itemprice = $orderitem->qty * $orderitem->item->price;
+					$hasOptions = $orderitem->options;
+					if($hasOptions)
+					{
+						$price = 0;
+						$orderOptions = unserialize($orderitem->options);
+						foreach($orderOptions as $option => $choice) {
+							foreach($orderitem->item->options as $itemOption) {
+								if($itemOption->name == $option) {
+									foreach($itemOption->values as $itemOptionValue) {
+										if($itemOptionValue->value == $choice) {
+											$price += $itemOptionValue->price;
+										}
+									}
+								}
+							}
+						}
+
+						$price = ($price == 0) ? $price = $orderitem->item->price : $price;
+						$itemprice = $orderitem->qty * $price;
+					}
+					else
+					{
+						$itemprice = $orderitem->qty * $orderitem->item->price;
+					}
+
 					$total = $total + $itemprice;
 					$subtotal = $total;
 				}
@@ -151,10 +176,42 @@
 		**/
 		public static function get($id)
 		{
-			$relationships = array('items','items.item','restaurant','restaurant.meta','restaurant.area','restaurant.city');
+			//model relationships
+			$relationships = array(
+				'items',
+				'items.item',
+				'items.item.options',
+				'items.item.options.values',
+				'restaurant','restaurant.meta',
+				'restaurant.area','restaurant.city'
+			);
+			//fetch order
 			$order = Order::with($relationships)->find($id);
-
 			$order->total = self::orderCost($order);
+
+			//format item prices
+			foreach($order->items as $orderitem) {
+				$hasOptions = $orderitem->options;
+				if($hasOptions)
+				{
+					$price;
+					$orderOptions = unserialize($orderitem->options);
+					foreach($orderOptions as $option => $choice) {
+						foreach($orderitem->item->options as $itemOption) {
+							if($itemOption->name == $option) {
+								foreach($itemOption->values as $itemOptionValue) {
+									if($itemOptionValue->value == $choice) {
+										if($itemOptionValue->price != 0 )
+											$price = $itemOptionValue->price;
+									}
+								}
+							}
+						}
+					}
+					//set item unit price
+					$orderitem->item->price = $price;
+				}
+			}
 
 			return $order;
 		}
