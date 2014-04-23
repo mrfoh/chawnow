@@ -53,6 +53,17 @@
 			else
 				return false;
 		}
+
+		public static function findById($id)
+		{
+			//get restaurant by slug
+			$restaurant = Restaurant::with('meta')->find($id);
+
+			if($restaurant)
+				return $restaurant;
+			else
+				return false;
+		}
 		/**
 		* Determines if a restaurants status
 		* @return boolean

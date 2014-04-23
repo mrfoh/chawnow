@@ -2,7 +2,7 @@
 <html lang="en-gb">
 	<head>
 		<meta charset="UTF-8">
-		<title>Chawnow | Control Panel | Login</title>
+		<title>Chawnow | Control Panel | @yield('title') </title>
 
 		{{ HTML::style('assets/css/bootstrap.min.css') }}
 		{{ HTML::style('assets/css/controlpanel/theme.css') }}

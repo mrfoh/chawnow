@@ -36,7 +36,7 @@
 					return Redirect::to('login');
 				}
 				
-				$staff = RestaurantStaff::where('user_id','=',$user->id)->first();
+				$staff = RestaurantStaff::where('user_id','=',$user->id)->get();
 				if($staff)
 				{
 					try {
@@ -51,7 +51,10 @@
 						// Try to authenticate the user
 		    			$user = Sentry::authenticate($credentials, $remember);
 
-		    			return Redirect::to('/');
+		    			if(count($staff) == 1)
+		    				return Redirect::to('/');
+		    			elseif(count($staff) > 1)
+		    				return Redirect::to('restaurant-select');
 		    		}
 					catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
 					{

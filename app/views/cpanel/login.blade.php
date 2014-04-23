@@ -1,5 +1,7 @@
 @extends('cpanel.layouts.login')
 
+@section('title') Login @stop
+
 @section('content')
 <div class="login-page">
 

@@ -61,6 +61,10 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 	Route::get('user/change-password', 'CpanelUserController@showPasswordForm');
 	Route::post('user/change-password', 'CpanelUserController@changePassword');
 
+	//Restaurant select
+	Route::get('restaurant-select/{id}', 'CpanelRestaurantSelectController@select');
+	Route::get('restaurant-select', 'CpanelRestaurantSelectController@index');
+
 	//Authentication routes
 	Route::get('login', 'CpanelAuthController@showLogin');
 	Route::post('login', 'CpanelAuthController@login');

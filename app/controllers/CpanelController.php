@@ -31,17 +31,25 @@
 			$user = Sentry::getUser();
 			if($user)
 			{
-				//get user restaurant
-				$restaurant = Restaurants::findByStaffId($user->id);
-				//set restaurant
-				$this->restaurant = $restaurant;
+				//check if restaurant is set in session
+				$checkRestaurant = Session::get('restaurant');
+				if($checkRestaurant) {
+					$this->restaurant = Restaurants::findById((int) $checkRestaurant);
+				}
+				else {
+					//get user restaurant
+					$restaurant = Restaurants::findByStaffId($user->id);
+					//set restaurant
+					$this->restaurant = $restaurant;
+				}
+			
 				//set user
 				$this->user = $user;
 				//Global view data
 				View::share('firstname',$user->first_name);
 				View::share('lastname', $user->last_name);
-				View::share('status', Restaurants::status($restaurant->id));
-				View::share('restaurantData', $restaurant);
+				View::share('status', Restaurants::status($this->restaurant->id));
+				View::share('restaurantData', $this->restaurant);
 			}
 		}
 	}
