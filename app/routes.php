@@ -74,10 +74,6 @@ Route::group(array("domain" => Config::get('app.cpanel_url')), function()
 		return Redirect::to('login');
 	});
 
-	Route::get('test', function() {
-		$order = Orders::get(8);
-	});
-
 	//upload controller
 	Route::any('upload','UploadController@index');
 	Route::get('/', array('before' => 'cpanel_auth', 'uses' => 'CpanelHomeController@dashboard') );
@@ -207,8 +203,31 @@ Route::get('tos', 'PagesController@tos');
 //privacy
 Route::get('privacy', 'PagesController@privacy');
 
-Route::get('test', function() {
-	
+Route::get('copy/{id}', function($id) {
+	//get restaurant menu
+	$restaurantMenus = Menu::with('items')->where('restaurant_id','=',8)->get();
+	foreach ($restaurantMenus as $menu) {
+		$newmenu = new Menu;
+		$newmenu->name = $menu->name;
+		$newmenu->slug = $menu->slug;
+		$newmenu->active = $menu->active;
+		$newmenu->restaurant_id = $id;
+
+		$newmenu->save();
+
+		foreach($menu->items as $item)
+		{	
+			$newitem = new Item;
+			$newitem->restaurant_id = $id;
+			$newitem->name = $item->name;
+			$newitem->price = $item->price;
+			$newitem->description = $item->description;
+			$newitem->menu_id = $newmenu->id;
+			$newitem->active = $item->active
+
+			$newitem->save();
+		}
+	}
 });
 
 Route::get('logout', function() {
