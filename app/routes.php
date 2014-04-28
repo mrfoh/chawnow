@@ -223,7 +223,7 @@ Route::get('copy/{id}', function($id) {
 			$newitem->price = $item->price;
 			$newitem->description = $item->description;
 			$newitem->menu_id = $newmenu->id;
-			$newitem->active = $item->active
+			$newitem->active = $item->active;
 
 			$newitem->save();
 		}
