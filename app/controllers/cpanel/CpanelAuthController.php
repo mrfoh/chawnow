@@ -74,7 +74,7 @@
 				}
 				else
 				{
-					Session::flash('message', "Access Denied! You are not a restaurant's staff list");
+					Session::flash('message', "Access Denied!");
 					return Redirect::to('login');
 				}
 			}
