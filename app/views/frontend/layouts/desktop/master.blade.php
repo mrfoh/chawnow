@@ -2,7 +2,6 @@
 <html lang="en-gb">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="description" content="@yield('description')">
 		<meta name="keywords" content="Chawnow, Chawow.com, delivery, order, food, nigeria, 'port-harcourt' ng, online, PH, PHC", >
 		<meta name="description" content="Order food from the best local restaurants in Port-Harcourt, Nigeria • Select your food from a large choice : pizza, sushi, American food... •  Fast and convenient •  Cash on delivery.
 "> 
